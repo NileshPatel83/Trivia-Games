@@ -11,20 +11,20 @@ const categoryArray = ['','artliterature','language','sciencenature','general','
 totalQuestionNumber = 10;
 
 //DOM Elements
-const containerEl = document.querySelector('.container');
+const containerEl = document.querySelector('#container');
 
 init();
 
 //Initial function when the page is loaded.
 function init(){
-    let questions = getTriviaQuestions();
-    
+
+    //Gets the list of questions from ninja trivia.
+    getTriviaQuestions();
+
 }
 
 //Gets the list of questions from ninja trivia.
 function getTriviaQuestions(){
-
-    let questions = [];
 
     let requestURL = `${queryURL}?category=${categoryArray[0]}&limit=${totalQuestionNumber}`;
 
@@ -33,14 +33,48 @@ function getTriviaQuestions(){
         headers: { 'X-Api-Key': ninjaAPIKey},
     };
 
-        fetch(requestURL, options)
-	.then(response => response.json())
-	.then(data => {
-        data.forEach(element => {
-            questions.push(element);
-        });
-    })
-	.catch(err => console.error(err));
+    fetch(requestURL, options)
+    .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        for (let i = 0; i < data.length; i++){
+            displayTriviaQuestion(data[i], i);;
+        }
+      });
+}
 
-    return questions;
+//Displays the question in browser using container.
+function displayTriviaQuestion(triviaQuestion, index){
+
+    const category = `Category: ${triviaQuestion.category}`;
+    const question = `${index + 1}. ${triviaQuestion.question}`;
+    const answer = triviaQuestion.answer;
+
+    let questionDivEl = document.createElement('div');
+    questionDivEl.setAttribute('data-index', index);
+
+    let questionEl = document.createElement('h2');
+    questionEl.textContent = question;
+
+    let categoryEl = document.createElement('div');
+    categoryEl.textContent = category;
+
+    let textboxLabelEl = document.createElement('label');
+    textboxLabelEl.setAttribute('for', `answer-${index}`);
+    textboxLabelEl.innerHTML = 'Answer: ';
+
+    let answerTextboxEl = document.createElement('input');
+    answerTextboxEl.type = 'text';
+    answerTextboxEl.id = `answer-${index}`;
+
+    let submitButtonEl = document.createElement('button');
+    submitButtonEl.innerHTML = 'Submit';
+
+    let hintButtonEl = document.createElement('button');
+    hintButtonEl.innerHTML = 'Hint';
+
+    questionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, submitButtonEl, hintButtonEl);
+
+    containerEl.append(questionDivEl);
 }
