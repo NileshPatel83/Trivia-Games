@@ -16,10 +16,41 @@ const containerEl = document.querySelector('#container');
 //Class names
 const submitButtonClass = 'submit-button';
 
+//ID names
+const startQuizButtonID = 'start-quiz-button';
+const hintButtonID = 'hint-button';
+
+//Attribute names
+const dataIndex = 'data-index';
+
 //Array of trivia question object which contains question, answer and category.
 let triviaQuestions;
 
 init();
+
+containerEl.addEventListener('click', event => {
+
+    let targetEl = event.target;
+
+    if (targetEl.id === hintButtonID){
+        dispalyHint(targetEl);
+    }
+});
+
+function dispalyHint(hintBtnEl){
+;
+
+    let index = parseInt(hintBtnEl.getAttribute(dataIndex));
+
+    let containerDivEl = containerEl.children[index];
+
+    let wikiSearchResults = getWikipediaSearchResults(triviaQuestions[index]);
+}
+
+
+
+
+
 
 //Initial function when the page is loaded.
 async function init(){
@@ -65,8 +96,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     //Creates a div for each question with data-index.
     //Data index will be used to check answers.
     let questionDivEl = document.createElement('div');
-    questionDivEl.setAttribute('data-index', index);
-
+    
     //Creates question as h2 element.
     let questionEl = document.createElement('h2');
     questionEl.textContent = question;
@@ -88,6 +118,8 @@ function displayTriviaQuestion(triviaQuestion, index){
 
     //Hint button to dispaly wikipedia search results.
     let hintButtonEl = document.createElement('button');
+    hintButtonEl.id = hintButtonID;
+    hintButtonEl.setAttribute(dataIndex, index);
     hintButtonEl.innerHTML = 'Hint';
 
     questionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintButtonEl);
@@ -108,14 +140,4 @@ async function getTriviaQuestions(){
     const response = await fetch(requestURL, options);
 
     return response.json();
-
-    // fetch(requestURL, options)
-    // .then(function (response) {
-    //     return response.json();
-    //   })
-    //   .then(function (data) {
-    //     for (let i = 0; i < data.length; i++){
-    //         displayTriviaQuestion(data[i], i);;
-    //     }
-    //   });
 }
