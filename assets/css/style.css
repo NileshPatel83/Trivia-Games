@@ -1,0 +1,18 @@
+
+
+#progressBar {
+    width: 100%;
+    height: 1rem;
+    border: 3px solid grey;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin: 0.5rem 0;
+}
+
+#progressBarFull {
+    height: 100%;
+    background-color:grey;
+    /*start from 0% width adjust % percentage in JS*/
+    width: 0%;
+}
+
