@@ -1,27 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Trivia Games</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    <header>
 
-    </header>
+  <div>
+    <select id="category-select">
+      <option value="music">Music</option>
+      <option value="artliterature">Art and Literature</option>
+      <option value="language">Language</option>
+      <option value="sciencenature">Science and Nature</option>
+      <option value="general">General</option>
+      <option value="fooddrink">Food and Drink</option>
+      <option value="peopleplaces">People and Places</option>
+      <option value="geography">Geography</option>
+      <option value="historyholidays">History and Holidays</option>
+      <option value="entertainment">Entertainment</option>
+      <option value="toysgames">Toys and Games</option>
+      <option value="mathematics">Mathematics</option>
+      <option value="religionmythology">Religion and Mythology</option>
+      <option value="sportsleisure">Sports and Leisure</option>
+    </select>
+    <button id="generate-button">Generate Question</button>
+  </div>
+  <div>
+    <p id="question"></p>
+  </div>
+  <div>
+    <form id="answer-form">
+      <input id="answer-input" type="text" placeholder="Enter your answer">
+      <button type="submit">Check Answer</button>
+    </form>
+  </div>
+</div>
 
-    <main>
-        <h1>Trivia Questions</h1>
-        <div id="container" class="container">
 
-        </div>
-    </main>
 
-    <footer>
 
-    </footer>
 
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="./assets/js/script.js"></script>
-
+  <div id="message"></div>
+  
+  <script src="./script.js"></script>
 </body>
 </html>
