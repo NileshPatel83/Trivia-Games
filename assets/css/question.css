@@ -1,0 +1,9 @@
+
+
+@media screen and (max-width:768px) {
+    .category-narrow{
+        display: hidden;
+
+    }
+}
+
