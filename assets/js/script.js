@@ -1,5 +1,5 @@
 let result;
-let questionIndex;
+let questions = [];
 let category = 'music'; // initialize the category variable with the default value
 const options = {
     method: 'GET',
@@ -17,39 +17,55 @@ const generateButton = document.querySelector('#generate-button');
 generateButton.addEventListener('click', generateQuestion);
 
 function generateQuestion() {
-    fetch(`https://api.api-ninjas.com/v1/trivia?category=${category}`, options)
+    fetch(`https://api.api-ninjas.com/v1/trivia?category=${category}&limit=10`, options)
         .then(response => response.json())
         .then(res => {
             result = res;
-            console.log(result)
             if(result && result.length > 0) {
-                questionIndex = Math.floor(Math.random() * result.length);
-                const question = result[questionIndex].question;
-                const questionElement = document.querySelector('#question');
-                questionElement.innerText = question;
-            }
-        })
-        .catch(error => {
-            console.error('Error: ', error);
-        });
-}
+                document.querySelector('#question-container').innerHTML = "";
+                questions = [];
+                for (let i = 0; i < 10; i++) {
+                    let questionIndex = Math.floor(Math.random() * result.length);
+                    const question = result[questionIndex].question;
+                    questions.push({question: question, answer: result[questionIndex].answer});
+                    console.log(questions); // to see console log
+                    const questionElement = document.createElement('p');
+                    questionElement.innerText = question;
+                    // Create new input element
+                    const answerInput = document.createElement('input');
+                    answerInput.type = 'text';
+                    answerInput.id = 'answer-input' + i;
+                    questionElement.appendChild(answerInput);
+                    // Create new submit button
+                    const submitButton = document.createElement('button');
+                    submitButton.innerText = "Submit";
+                    submitButton.addEventListener('click', function() {
+                        checkAnswer(i);
+                    });
 
-const form = document.querySelector('#answer-form');
-form.addEventListener('submit', checkAnswer);
-
-function checkAnswer(event) {
-  event.preventDefault();
-  const answerInput = document.querySelector('#answer-input');
-  let userAnswer = answerInput.value;
-  userAnswer = userAnswer.toLowerCase().trim();
-  const correctAnswer = result[questionIndex].answer.toLowerCase().trim();
-  const message = document.querySelector('#message');
-  if (userAnswer === correctAnswer) {
-    message.innerText = 'Correct!';
-    answerInput.style.backgroundColor = 'green';
-   } else {
-        message.innerText = 'Wrong! The correct answer is ' + correctAnswer;
-        answerInput.style.backgroundColor = 'red';
-    }
-    answerInput.value = "";
-}
+                    questionElement.appendChild(submitButton);
+                    document.querySelector('#question-container').appendChild(questionElement);
+                    result.splice(questionIndex,1);
+                    }
+                    }
+                    })
+                    .catch(error => {
+                    console.error('Error: ', error);
+                    });
+                    }
+                    
+            function checkAnswer(index) {
+             const answerInput = document.getElementById('answer-input'+index);
+             let userAnswer = answerInput.value;
+                userAnswer = userAnswer.toLowerCase().trim();
+                const correctAnswer = questions[index].answer.toLowerCase().trim();
+                const message = document.querySelector('#message');
+                if (userAnswer === correctAnswer) {
+                message.innerText = 'Correct!';
+                answerInput.style.backgroundColor = 'green';
+                 } else {
+                message.innerText = 'Wrong! The correct answer is ' + correctAnswer;
+                answerInput.style.backgroundColor = 'red';
+                 }
+                answerInput.value = "";
+                }
