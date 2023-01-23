@@ -8,355 +8,88 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+    <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/style.css">
 
     <title>Trivia-Game</title>
 </head>
 <body>
-    <header class="section has-background-link has-text-white">
-        <nav class="navbar custom-navbar is-link" role="navigation" aria-label="main navigation" >
-            <div class="navbar-brand">
-              <a class="navbar-item" href="#">
-                <img src="assets/images/logo.png" width="100" height="100">
-              </a>
-          
-              <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-                <span aria-hidden="true"></span>
-              </a>
+  <header>
+    <nav class="navbar is-link py-4 has-text-weight-bold is-size-5" role="navigation" aria-label="main navigation" >
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#">
+          <img src="assets/images/logo.png" width="100" height="100">
+        </a>
+
+        <div role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <div class="navbar-menu" id="navMenu">
+        <div class="navbar-start">
+          <a class="navbar-item">Home</a>
+
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link is-arrowless">Category</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">option</a>
+              <a class="navbar-item">option</a>
+
             </div>
-          
-            <div id="navbarBasicExample" class="navbar-menu">
-              <div class="navbar-start">
-                <a class="navbar-item">
-                  Home
-                </a>
-          
-                <a class="navbar-item">
-                    Category
-                </a>
-          
-                <div class="navbar-item has-dropdown is-hoverable">
-                  <a class="navbar-link">
-                    More
-                  </a>
-          
-                  <div class="navbar-dropdown">
-                    <a class="navbar-item">
-                      About us
-                    </a>
-                  
-                    <a class="navbar-item">
-                      Contact
-                    </a>
-                    <hr class="navbar-divider">
-                    <a class="navbar-item">
-                      Report an issue
-                    </a>
-                  </div>
-                </div>
-              </div>
-          
-              <div class="navbar-end">
-                <div class="navbar-item">
-                  <div class="buttons">
-                    <a class="button is-primary">
-                      <strong>Sign up</strong>
-                    </a>
+          </div>
 
-                    <a class="button is-light">
-                      Log in
-                    </a>
-
-                    <a class="button is-primary" href="https://github.com/NileshPatel83/Trivia-Games">
-                        <span class="icon">
-                          <i class="fas fa-download"></i>
-                        </span>
-                        <span>Download</span>
-                    </a>
-                  </div>
-
-                </div>
-              </div>
+          <div class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">More</a>
+            <div class="navbar-dropdown">
+              <a class="navbar-item">About us</a>
+              <a class="navbar-item">Contact</a>
+              <hr class="navbar-divider">
+              <a class="navbar-item">Report an issue</a>
             </div>
-        </nav>
-    </header>
-
-    <main>
-        <div class="columns is-multiline">
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-ablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>  
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>  
-
-            <div class="column is-12-mobile is-4-tablet is-2-desktop is-2-widescreen is-2-fullhd">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">
-                          Category
-                        </p>
-                    </header>    
-
-                    <div class="card-image">
-                        <img src="assets/images/logo.png" alt="">
-                    </div>  
-
-                    <div id="progressBar">
-                        <div id="progressBarFull">bar **%</div>
-                    </div>
-
-                    <footer class="card-footer">
-                        <button class="button is-info">Select</button>            
-                      </footer>    
-                </div>             
-            </div>  
+          </div>
         </div>
 
-        <div>
-            <button class="button startButton is-info is-large is-responsive">Let's Start!</button>
-        </div>
-    </main>
-    
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons"> 
+              <a class="button is-primary">Sign up</a>
 
-    <script src="assets/js/script.js"></script>
+              <a class="button is-light"> Log in </a>
+
+              <a class="button is-primary" href="https://github.com/NileshPatel83/Trivia-Games">
+                <span class="icon">
+                  <i class="fas fa-download"></i>
+                </span>
+                <span>Download</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+
+  <a href="category.html" class="buttonStar">Start to Play</a>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="assets/js/script.js"></script>
 </body>
 
 <footer>

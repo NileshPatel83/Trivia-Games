@@ -6,13 +6,19 @@
     border: 3px solid grey;
     border-radius: 1rem;
     overflow: hidden;
-    margin: 0.5rem 0;
+    margin: 10px 0;
+     
 }
 
 #progressBarFull {
+   
     height: 100%;
     background-color:grey;
     /*start from 0% width adjust % percentage in JS*/
-    width: 0%;
+    /* set 50% for display purpose, should reset to 0% if js function works*/
+    width: 40%;
 }
 
+.saveButton {
+    justify-content: center;
+}
