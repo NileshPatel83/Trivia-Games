@@ -1,6 +1,6 @@
 let result;
 let questions = [];
-let category = 'music'; // initialize the category variable with the default value
+let category = 'language'; // initialize the category variable with the default value
 const options = {
     method: 'GET',
     headers: {
