@@ -75,41 +75,48 @@
   </header>
 
   <main class="section">
-    <div class="columns is-multiline" id="">
+    <div class="columns is-multiline" id="controls">
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Language
-            </h2> 
-          </header>
-
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="language">
+          <div class="card">
+            <header class="card-header has-background-info">
+              
+              <h2 class="card-header-title is-centered has-text-white">
+                Language
+              </h2>
+            </header>
+        
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            </div>
+        
+            <p id="progressText" class="has-text-centered has-text-weight-bold ">
+              50 of 100 to get a badge <!--add text using js -->
+            </p>
+        
+            <div id="progressBar">
+              <div id="progressBarFull">
+                <h3></h3> <!--add  progress bar width % using js -->
+              </div>
+            </div>
+        
+            <footer class="card-footer saveButton">
+              <button class="button is-info is-outlined has-text-weight-bold" onclick=""> <!--add onclick js -->
+                <span>Save</span>
+                <span class="icon is-normal">
+                  <i class="fas fa-check"></i>
+                </span>
+              </button>
+            </footer>
           </div>
-
-          <p id="progressText" class="has-text-centered has-text-weight-bold ">
-            50 of 100 to get a badge   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3></h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined has-text-weight-bold" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
+      
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="sciencenature">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -139,10 +146,13 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div>
+      </label>             
       </div>
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="geography">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -172,7 +182,8 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div>
+      </label>             
       </div>
 
       
@@ -182,11 +193,14 @@
      
 
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">   
+      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="entertainment">  
         <div class="card">
           <header class="card-header has-background-info">
+            
             <h2 class="card-header-title is-centered has-text-white">
-              Entertainment
+             Entertainment
             </h2> 
           </header>
 
@@ -212,10 +226,13 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div>
+      </label>              
       </div>
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="toysgames">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -234,7 +251,8 @@
           <div id="progressBar">
             <div id="progressBarFull">
               <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
+            </div>
+          </label>
           </div>
 
           <footer class="card-footer saveButton">
@@ -245,10 +263,13 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div>
+      </label>             
       </div>
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="mathematics">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -278,10 +299,13 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div>
+      </label>             
       </div>
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="religionmythology">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -311,10 +335,13 @@
               </span>
             </button>                            
           </footer>
-        </div>             
+        </div> 
+      </label>            
       </div>
 
       <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="sportsleisure">
         <div class="card">
           <header class="card-header has-background-info">
             <h2 class="card-header-title is-centered has-text-white">
@@ -346,6 +373,7 @@
           </footer>
         </div>             
       </div>
+    </label>
     </div>
 
     <div class="buttons saveButton">
