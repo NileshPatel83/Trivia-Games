@@ -21,9 +21,10 @@ const submitButtonClass = 'submit-button';
 
 //ID names
 const startQuizButtonID = 'start-quiz-button';
-const hintButtonID = 'hint-button';
-const hintDivID = 'hint-result';
-const moreInfoButtonID = 'more-info';
+const hintButtonID = 'hint-button-';
+const hintDivID = 'hint-result-';
+const moreInfoButtonID = 'more-info-';
+
 //Attribute names
 const dataIndex = 'data-index';
 
@@ -41,11 +42,10 @@ containerEl.addEventListener('click', event => {
 
     //If the clicked element is hint button for question, gets wikipedia search results and
     //displays 3 results.
-    if (targetEl.id === hintButtonID){
+    if (targetEl.id.indexOf(hintButtonID) !== -1){
         targetEl.disabled = true;
         searchWikipedia(targetEl);
-    } else if (targetEl.id === moreInfoButtonID){
-        const hintDivEl = document.getElementById(hintDivID);
+    } else if (targetEl.id.indexOf(moreInfoButtonID) !== -1){
         deleteWikiSearch(hintDivEl);
         // displayMoreInfoSearch(hintDivEl);
     }
@@ -86,15 +86,15 @@ async function searchWikipedia(hintBtnEl){
     console.log(wikiSearchResults);
 
     //Displays results in browser.
-    displayHint(containerDivEl, wikiSearchResults);
+    displayHint(containerDivEl, wikiSearchResults, index);
 }
 
 //Displays results in browser.
-function displayHint(containerDivEl, wikiSearchResults){
+function displayHint(containerDivEl, wikiSearchResults, index){
     
      //Creates a div element that will contain all searches.
      let resultDivEl = document.createElement('div');
-     resultDivEl.id = hintDivID;
+     resultDivEl.id = `${hintDivID}${index}`;
 
      displayWikiSearchResults(resultDivEl, wikiSearchResults);
 
@@ -106,12 +106,16 @@ function displayHint(containerDivEl, wikiSearchResults){
      let answerTextboxEl = document.createElement('input');
      answerTextboxEl.type = 'text';
 
-     let submitButtonEl = document.createElement('button');
-     submitButtonEl.innerHTML = 'More Info';
-     submitButtonEl.id = moreInfoButtonID;
+    //Creates button element for specific wikipedia search.
+    //Creates an attribute called 'data-index'.
+    //This index value will be used to determine which more info button is clicked.
+     let moreInfoButtonEl = document.createElement('button');
+     moreInfoButtonEl.id = `${moreInfoButtonID}${index}`;
+     moreInfoButtonEl.setAttribute(dataIndex, index);
+     moreInfoButtonEl.innerHTML = 'More Info';
 
     //Adds search result div element to container div.
-    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, submitButtonEl);
+    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, moreInfoButtonEl);
 }
 
 function displayWikiSearchResults(resultDivEl, wikiSearchResults){
@@ -259,7 +263,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     //Creates an attribute called 'data-index'.
     //This index value will be used to determine which question hint button is clicked.
     let hintButtonEl = document.createElement('button');
-    hintButtonEl.id = hintButtonID;
+    hintButtonEl.id = `${hintButtonID}${index}`;
     hintButtonEl.setAttribute(dataIndex, index);
     hintButtonEl.innerHTML = 'Hint';
 
