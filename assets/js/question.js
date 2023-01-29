@@ -36,18 +36,26 @@ init();
 //Event listener for div container.
 containerEl.addEventListener('click', event => {
     
-
     //Gets the element that is clicked.
     let targetEl = event.target;
 
-    //If the clicked element is hint button for question, gets wikipedia search results and
-    //displays 3 results.
+    //If the clicked element is hint button for question, gets wikipedia search results and displays 3 results.
     if (targetEl.id.indexOf(hintButtonID) !== -1){
+
+        //Disables the hint button so that user cannot clicl it again.
         targetEl.disabled = true;
+
+        //Searches wikipedia and displays search results related to questions and/ or answer.
         searchWikipedia(targetEl);
+
     } else if (targetEl.id.indexOf(moreInfoButtonID) !== -1){
-        deleteWikiSearch(hintDivEl);
-        // displayMoreInfoSearch(hintDivEl);
+
+        //First, deletes current wikipedia search results.
+        deleteWikiSearch(targetEl);
+
+        //Then re-searches wikipedia for user specified texts.
+        //Displays wikipedia results with new searches.
+        //displayMoreInfoSearch(hintDivEl);
     }
         
 });
@@ -61,11 +69,23 @@ async function displayMoreInfoSearch(hintDivEl){
 
 }
 
-function deleteWikiSearch(hintDivEl){
-    let searchResults = Array.from(hintDivEl.children);
-    searchResults.forEach(child=>{
-        child.remove();
-    });
+//Deletes wikipedia search results for specified question.
+function deleteWikiSearch(moreInfoBtnEl){
+
+    //Gets the index of hint button.
+    //This is to determine which question's more info button is clicked.
+    let index = parseInt(moreInfoBtnEl.getAttribute(dataIndex));
+
+    //Using the index, gets the div element that contains wikipedia search results.
+    let resultDivEl = document.getElementById(`${hintDivID}${index}`);
+
+    //Gets all direct child div elements that contains wikipedia results and removes them if found.
+    let searchResults = Array.from(resultDivEl.children);
+    if(typeof(searchResults) !== 'undefined'){
+        searchResults.forEach(child=>{
+            child.remove();
+        });
+    }
 }
 //Searches wikipedia and gets the results and displays results.
 async function searchWikipedia(hintBtnEl){
@@ -83,6 +103,7 @@ async function searchWikipedia(hintBtnEl){
     if(typeof(wikiSearchResults) === 'undefined'){
         return;
     }
+    
     console.log(wikiSearchResults);
 
     //Displays results in browser.
@@ -109,13 +130,13 @@ function displayHint(containerDivEl, wikiSearchResults, index){
     //Creates button element for specific wikipedia search.
     //Creates an attribute called 'data-index'.
     //This index value will be used to determine which more info button is clicked.
-     let moreInfoButtonEl = document.createElement('button');
-     moreInfoButtonEl.id = `${moreInfoButtonID}${index}`;
-     moreInfoButtonEl.setAttribute(dataIndex, index);
-     moreInfoButtonEl.innerHTML = 'More Info';
+    let moreInfoBtnEl = document.createElement('button');
+    moreInfoBtnEl.id = `${moreInfoButtonID}${index}`;
+    moreInfoBtnEl.setAttribute(dataIndex, index);
+    moreInfoBtnEl.innerHTML = 'More Info';
 
     //Adds search result div element to container div.
-    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, moreInfoButtonEl);
+    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, moreInfoBtnEl);
 }
 
 function displayWikiSearchResults(resultDivEl, wikiSearchResults){
