@@ -37,7 +37,7 @@ categoryCheckboxes.forEach(checkbox => {
     });
 });
 
-const generateButton = document.querySelector('#generate-button');
+const generateButton = document.querySelector('#saveButton');
 generateButton.addEventListener('click', function() {
     // Save the selected categories in local storage
     localStorage.setItem('categories', JSON.stringify(selectedCategories));
@@ -45,7 +45,7 @@ generateButton.addEventListener('click', function() {
 
 
     // Redirect the user to the "questions.html" page
-    window.location.href = 'questions.html';
+    window.location.replace('questions.html');
 });
 
 
