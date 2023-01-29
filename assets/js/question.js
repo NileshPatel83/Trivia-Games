@@ -34,6 +34,7 @@ init();
 
 //Event listener for div container.
 containerEl.addEventListener('click', event => {
+    
 
     //Gets the element that is clicked.
     let targetEl = event.target;
@@ -44,13 +45,23 @@ containerEl.addEventListener('click', event => {
         targetEl.disabled = true;
         searchWikipedia(targetEl);
     } else if (targetEl.id === moreInfoButtonID){
-        deleteWikiSearch();
+        const hintDivEl = document.getElementById(hintDivID);
+        deleteWikiSearch(hintDivEl);
+        // displayMoreInfoSearch(hintDivEl);
     }
         
 });
 
-function deleteWikiSearch(){
-    const hintDivEl = document.getElementById(hintDivID);
+async function displayMoreInfoSearch(hintDivEl){
+    let wikiSearchResults = await getWikipediaSearchResults(searchString);
+    if(typeof(wikiSearchResults) === 'undefined'){
+        return;
+    }
+    displayWikiSearchResults(hintDivEl, wikiSearchResults);
+
+}
+
+function deleteWikiSearch(hintDivEl){
     let searchResults = Array.from(hintDivEl.children);
     searchResults.forEach(child=>{
         child.remove();
@@ -67,10 +78,12 @@ async function searchWikipedia(hintBtnEl){
     let containerDivEl = containerEl.children[index];
 
     //Gets wikipedia result for the selected question using index number.
-    let wikiSearchResults = await getWikipediaSearchResults(triviaQuestions[index]);
-    if(wikiSearchResults === 'undefined'){
+    let searchString = `${triviaQuestions[index].question} + ${triviaQuestions[index].answer}`
+    let wikiSearchResults = await getWikipediaSearchResults(searchString);
+    if(typeof(wikiSearchResults) === 'undefined'){
         return;
     }
+    console.log(wikiSearchResults);
 
     //Displays results in browser.
     displayHint(containerDivEl, wikiSearchResults);
@@ -78,16 +91,34 @@ async function searchWikipedia(hintBtnEl){
 
 //Displays results in browser.
 function displayHint(containerDivEl, wikiSearchResults){
+    
+     //Creates a div element that will contain all searches.
+     let resultDivEl = document.createElement('div');
+     resultDivEl.id = hintDivID;
 
+     displayWikiSearchResults(resultDivEl, wikiSearchResults);
+
+     //Label for answer textbox.
+     let textboxLabelEl = document.createElement('label');
+     textboxLabelEl.innerHTML = 'Specific Search: ';
+
+     //Textbox for answer.
+     let answerTextboxEl = document.createElement('input');
+     answerTextboxEl.type = 'text';
+
+     let submitButtonEl = document.createElement('button');
+     submitButtonEl.innerHTML = 'More Info';
+     submitButtonEl.id = moreInfoButtonID;
+
+    //Adds search result div element to container div.
+    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, submitButtonEl);
+}
+
+function displayWikiSearchResults(resultDivEl, wikiSearchResults){
     //If total searches from wikipedia is less than 3, sets the length as search length.
     if (wikiSearchResults.query.search.length < wikipediaResultNumber){
         wikipediaResultNumber = wikiSearchResults.query.search.length;
     }
-
-    //Creates a div element that will contain all searches.
-    let resultDivEl = document.createElement('div');
-    resultDivEl.id = hintDivID;
-
 
     //Loop through wikipedia searches.
     for (let i = 0; i < wikipediaResultNumber; i++) {
@@ -116,33 +147,18 @@ function displayHint(containerDivEl, wikiSearchResults){
         //Adds the inner div element to seach result div element.
         resultDivEl.append(innerResultDivEl);
     }
-
-     //Label for answer textbox.
-     let textboxLabelEl = document.createElement('label');
-     textboxLabelEl.innerHTML = 'Specific Search: ';
-
-     //Textbox for answer.
-     let answerTextboxEl = document.createElement('input');
-     answerTextboxEl.type = 'text';
-
-     let submitButtonEl = document.createElement('button');
-     submitButtonEl.innerHTML = 'More Info';
-     submitButtonEl.id = moreInfoButtonID;
-
-    //Adds search result div element to container div.
-    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, submitButtonEl);
 }
 
 //Gets wikipedia result for the selected question.
 //Search result is obtained using question and asnwer both.
 //Returns the search result as an object which contains an object called 'query'.
 //'query' object contains array of all search results from wikipedia.
-async function getWikipediaSearchResults(triviaQuestion){
+async function getWikipediaSearchResults(searchString){
 
     let params = {
         action: "query",
         list: "search",
-        srsearch: `${triviaQuestion.question} + ${triviaQuestion.answer}`,
+        srsearch: searchString,
         format: "json"
     };
 
