@@ -53,33 +53,59 @@ containerEl.addEventListener('click', event => {
     } else if (targetEl.id.indexOf(moreInfoButtonID) !== -1){
 
         //First, deletes current wikipedia search results.
-        deleteWikiSearch(targetEl);
-
         //Then re-searches wikipedia for user specified texts.
         //Displays wikipedia results with new searches.
-        //displayMoreInfoSearch(hintDivEl);
+        processSpecificSearch(targetEl);
     }
-        
 });
 
-async function displayMoreInfoSearch(hintDivEl){
-    let wikiSearchResults = await getWikipediaSearchResults(searchString);
-    if(typeof(wikiSearchResults) === 'undefined'){
-        return;
-    }
-    displayWikiSearchResults(hintDivEl, wikiSearchResults);
-
-}
-
-//Deletes wikipedia search results for specified question.
-function deleteWikiSearch(moreInfoBtnEl){
+//First, deletes current wikipedia search results.
+//Then re-searches wikipedia for user specified texts.
+//Displays wikipedia results with new searches.
+function processSpecificSearch(moreInfoBtnEl){
 
     //Gets the index of hint button.
     //This is to determine which question's more info button is clicked.
     let index = parseInt(moreInfoBtnEl.getAttribute(dataIndex));
 
+    //Using the index, gets specific search textbox element.
+    let specSearchTextboxEl = document.getElementById(`${specSearchTextboxID}${index}`);
+
+    //Gets user specified search string and removes white spaces from start and end.
+    let searchString = specSearchTextboxEl.value;
+    searchString = searchString.trim();
+
+    //Exists the function if specified string is an empty string.
+    if(searchString === ''){
+        return;
+    }
+
     //Using the index, gets the div element that contains wikipedia search results.
     let resultDivEl = document.getElementById(`${hintDivID}${index}`);
+
+    //Deletes current wikipedia search results.
+    deleteWikiSearch(resultDivEl);
+
+    //Searches wikipedia for specific text and displays search results.
+    displayMoreInfoSearch(resultDivEl, searchString);
+}
+
+//Searches wikipedia for specific text and displays search results.
+async function displayMoreInfoSearch(resultDivEl, searchString){
+
+    //Re-searches wikipedia for user specified texts.
+    let wikiSearchResults = await getWikipediaSearchResults(searchString);
+    if(wikiSearchResults.query.search.length === 0){
+        return;
+    }
+
+    //Displays wikipedia results with new searches.
+    displayWikiSearchResults(resultDivEl, wikiSearchResults);
+
+}
+
+//Deletes wikipedia search results for specified question.
+function deleteWikiSearch(resultDivEl){
 
     //Gets all direct child div elements that contains wikipedia results and removes them if found.
     let searchResults = Array.from(resultDivEl.children);
@@ -89,6 +115,7 @@ function deleteWikiSearch(moreInfoBtnEl){
         });
     }
 }
+
 //Searches wikipedia and gets the results and displays results.
 async function searchWikipedia(hintBtnEl){
 
