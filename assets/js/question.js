@@ -26,6 +26,7 @@ const hintDivID = 'hint-result-';
 const answerTextboxID = 'answer-';
 const specSearchTextboxID = 'spec-search-';
 const moreInfoButtonID = 'more-info-';
+const checkAnsBtnID = 'check-answer-';
 
 //Attribute names
 const dataIndex = 'data-index';
@@ -50,21 +51,80 @@ containerEl.addEventListener('click', event => {
         //Searches wikipedia and displays search results related to questions and/ or answer.
         searchWikipedia(targetEl);
 
+    //If the clicked element is more info button, re-searches wikipedia and updated search results.
     } else if (targetEl.id.indexOf(moreInfoButtonID) !== -1){
 
-        //First, deletes current wikipedia search results.
-        //Then re-searches wikipedia for user specified texts.
-        //Displays wikipedia results with new searches.
         processSpecificSearch(targetEl);
+
+    //If the clicked element is check answer button and
+    //if the answer is correct, changes answer textbox background to gree,
+    //otherwise changes the background to red.
+    //Also displays correct answer if user answer is wrong.
+    } else if (targetEl.id.indexOf(checkAnsBtnID) !== -1){
+
+        //Disables the check answer button so that user cannot clicl it again.
+        targetEl.disabled = true;
+
+        processUserAnswer(targetEl);
     }
 });
+
+
+//Processes user answer.
+function processUserAnswer(checkAnsBtnEl){
+
+    //Gets the index of check answer button.
+    //This is to determine which question's check answer button is clicked.
+    let index = parseInt(checkAnsBtnEl.getAttribute(dataIndex));
+
+    //Using the index, gets answer textbox element.
+    let answerTextboxEl = document.getElementById(`${answerTextboxID}${index}`);
+
+    //Gets user answer and removes white spaces from start and end.
+    let userAnswer = answerTextboxEl.value;
+    userAnswer = userAnswer.trim().toLowerCase();
+
+    let correctAnswer = triviaQuestions[index].answer.toLowerCase();
+
+    //Compares user answer with correct answer.
+    if(userAnswer === correctAnswer){
+
+        //Sets answer textbox background color to green, if user answer if correct.
+        answerTextboxEl.style.background = 'green';
+    }
+    else{
+
+        //Sets answer textbox background color to red, if user answer if correct.
+        answerTextboxEl.style.background = 'red';
+
+        //Adds a dive element to display correct answer.
+        let innerQuestionDivEl = checkAnsBtnEl.parentElement;
+
+        let answerDivEl = document.createElement('div');
+        answerDivEl.textContent = `Correct Answer: ${triviaQuestions[index].answer}`;
+        innerQuestionDivEl.append(answerDivEl);
+    }
+
+    //Using the index, gets specific search textbox element and disables it if found.
+    let specSearchTextboxEl = document.getElementById(`${specSearchTextboxID}${index}`);
+    if(specSearchTextboxEl !== null){
+        specSearchTextboxEl.value = '';
+        specSearchTextboxEl.disabled = true;
+    }
+
+    //Using the index, gets more info element and disables it if found.
+    let moreInfoBtnEl = document.getElementById(`${moreInfoButtonID}${index}`);
+    if(moreInfoBtnEl !== null){
+        moreInfoBtnEl.disabled = true;
+    }
+}
 
 //First, deletes current wikipedia search results.
 //Then re-searches wikipedia for user specified texts.
 //Displays wikipedia results with new searches.
 function processSpecificSearch(moreInfoBtnEl){
 
-    //Gets the index of hint button.
+    //Gets the index of more info button.
     //This is to determine which question's more info button is clicked.
     let index = parseInt(moreInfoBtnEl.getAttribute(dataIndex));
 
@@ -288,7 +348,6 @@ function displayTriviaQuestion(triviaQuestion, index){
 
     const category = `Category: ${triviaQuestion.category}`;
     const question = `${index + 1}. ${triviaQuestion.question}`;
-    const answer = triviaQuestion.answer;
 
     //Creates a div that will contain question and wikipedia search results.
     let questionDivEl = document.createElement('div');
@@ -314,17 +373,24 @@ function displayTriviaQuestion(triviaQuestion, index){
     let answerTextboxEl = document.createElement('input');
     answerTextboxEl.type = 'text';
     answerTextboxEl.id = `${answerTextboxID}${index}`;
+    answerTextboxEl.value = triviaQuestion.answer;
 
     //Hint button to dispaly wikipedia search results.
     //Creates an attribute called 'data-index'.
     //This index value will be used to determine which question hint button is clicked.
-    let hintButtonEl = document.createElement('button');
-    hintButtonEl.id = `${hintButtonID}${index}`;
-    hintButtonEl.setAttribute(dataIndex, index);
-    hintButtonEl.innerHTML = 'Hint';
+    let hintBtnEl = document.createElement('button');
+    hintBtnEl.id = `${hintButtonID}${index}`;
+    hintBtnEl.setAttribute(dataIndex, index);
+    hintBtnEl.innerHTML = 'Hint';
+
+    //Creates a button where user can check the answer of specific question.
+    let checkAnsBtnEl = document.createElement('button');
+    checkAnsBtnEl.id = `${checkAnsBtnID}${index}`;
+    checkAnsBtnEl.setAttribute(dataIndex, index);
+    checkAnsBtnEl.innerHTML = 'Check Answer';
 
     //Adds question elements to inner div.
-    innerQuestionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintButtonEl);
+    innerQuestionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintBtnEl, checkAnsBtnEl);
 
     //Adds inner div to outer div.
     questionDivEl.append(innerQuestionDivEl);
