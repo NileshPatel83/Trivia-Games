@@ -1,4 +1,47 @@
+* {
+    background-color: #180344;
+}
 
+.welcome {
+    font-size: 3rem; /* make the font size bigger */
+    font-weight: bold; /* make the text bold */
+    text-align: center; /* center the text */
+    margin-bottom: 2rem; /* add some space between the text and the button */
+    padding-top: 3rem;
+    color: #FFD53D;
+  }
+
+  .buttonStart {
+    margin-top: 2rem; /* add some space between the text and the button*/
+    background-color: #FFD53D;
+    color: #0067B3;
+  }
+
+  .title {
+    margin-top: 3rem;
+    color: #FFD53D;
+    text-indent: 75px;
+  }
+
+ ul {
+    font-size: 1rem;
+    text-indent: 75px;
+    color: #FFD53D;
+  }
+  
+  li {
+    padding-top: 0.5rem;/*adds spacing between items of the list*/
+  }
+  
+  .final {
+    font-size: 1.2rem; /* make the font size slightly bigger */
+    font-weight: bold; /* make the text bold */
+    text-align: center; /* center the text */
+    margin-top: 5rem; /* add some space between the list and the final text */
+    background-color: #FFD53D;
+    color: #0067B3;
+  }
+  
 
 #progressBar {
     width: 100%;
