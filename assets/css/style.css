@@ -1,90 +1,51 @@
 * {
-    background-color: #180344;
+  background-color: #180344;
 }
 
 .welcome {
-    font-size: 3rem; /* make the font size bigger */
-    font-weight: bold; /* make the text bold */
-    text-align: center; /* center the text */
-    margin-bottom: 2rem; /* add some space between the text and the button */
-    padding-top: 3rem;
-    color: #FFD53D;
-  }
+  font-size: 3rem; /* make the font size bigger */
+  font-weight: bold; /* make the text bold */
+  text-align: center; /* center the text */
+  margin-bottom: 2rem; /* add some space between the text and the button */
+  padding-top: 3rem;
+  color: #FFD53D;
+}
 
-  .buttonStart {
-    margin-top: 2rem; /* add some space between the text and the button*/
-    background-color: #FFD53D;
-    color: #0067B3;
-  }
-
-  .title {
-    margin-top: 3rem;
-    color: #FFD53D;
-    text-indent: 75px;
-  }
-
- ul {
-    font-size: 1rem;
-    text-indent: 75px;
-    color: #FFD53D;
-  }
+.buttonStart {
+  margin-top: 2rem; /* add some space between the text and the button*/
+  background-color: #FFD53D;
+  color: #0067B3;
+  font-weight: bold;
   
-  li {
-    padding-top: 0.5rem;/*adds spacing between items of the list*/
-  }
-  
-  .final {
-    font-size: 1.2rem; /* make the font size slightly bigger */
-    font-weight: bold; /* make the text bold */
-    text-align: center; /* center the text */
-    margin-top: 5rem; /* add some space between the list and the final text */
-    background-color: #FFD53D;
-    color: #0067B3;
-  }
-  
-
-#progressBar {
-    width: 100%;
-    height: 1rem;
-    border: 3px solid grey;
-    border-radius: 1rem;
-    overflow: hidden;
-    margin: 10px 0;
-     
 }
 
-#progressBarFull {
-   
-    height: 100%;
-    background-color:grey;
-    /*start from 0% width adjust % percentage in JS*/
-    /* set 50% for display purpose, should reset to 0% if js function works*/
-    width: 40%;
+.buttonStart:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+  box-shadow: 0 0.4rem 1.4rem 0 #FFD53D;
 }
 
-.saveButton {
-    justify-content: center;
+.title {
+  margin-top: 3rem;
+  color: #FFD53D;
+  text-indent: 75px;
 }
 
-/* input[type="checkbox"]:checked {
-    /* styles for checked checkboxes */
-    /* margin: 50px; */
-    
-  /* } */
-.checkboxContainer {
-    position: relative;
-    display: block;
-    cursor: pointer;
+ul {
+  font-size: 1.2rem;
+  text-indent: 75px;
+  color: #FFD53D;
 }
 
+li {
+  padding-top: 0.5rem;/*adds spacing between items of the list*/
+}
 
-.checkboxContainer input[type=checkbox] {
-    height: 0;
-    width: 0;
-    opacity: 0;
-    position: absolute;
-  }
-
-  .checkboxContainer input[type=checkbox]:checked~.card {
-    border: 2px solid black;
-  }
+.final {
+  font-size: 1.2rem; /* make the font size slightly bigger */
+  font-weight: bold; /* make the text bold */
+  text-align: center; /* center the text */
+  margin-top: 5rem; /* add some space between the list and the final text */
+  background-color: #FFD53D;
+  color: #0067B3;
+}
