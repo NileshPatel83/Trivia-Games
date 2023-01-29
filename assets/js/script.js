@@ -8,19 +8,14 @@ $(".navbar-burger").click(function() {
 });
  
 
+window.onload = function() {
+    // Get the selected categories from the first page
+    let selectedCategories = JSON.parse(localStorage.getItem("selectedCategories"));
 
+    // Get the questions from local storage
+    let allQuestions = JSON.parse(localStorage.getItem("questions"));
 
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 
