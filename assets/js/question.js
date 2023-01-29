@@ -23,6 +23,8 @@ const submitButtonClass = 'submit-button';
 const startQuizButtonID = 'start-quiz-button';
 const hintButtonID = 'hint-button-';
 const hintDivID = 'hint-result-';
+const answerTextboxID = 'answer-';
+const specSearchTextboxID = 'spec-search-';
 const moreInfoButtonID = 'more-info-';
 
 //Attribute names
@@ -129,9 +131,10 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      let textboxLabelEl = document.createElement('label');
      textboxLabelEl.innerHTML = 'Specific Search: ';
 
-     //Textbox for answer.
-     let answerTextboxEl = document.createElement('input');
-     answerTextboxEl.type = 'text';
+     //Textbox for specific search.
+     let specSearchTextboxEl = document.createElement('input');
+     specSearchTextboxEl.type = 'text';
+     specSearchTextboxEl.id = `${specSearchTextboxID}${index}`;
 
     //Creates button element for specific wikipedia search.
     //Creates an attribute called 'data-index'.
@@ -142,7 +145,7 @@ function displayHint(containerDivEl, wikiSearchResults, index){
     moreInfoBtnEl.innerHTML = 'More Info';
 
     //Adds search result div element to container div.
-    containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, moreInfoBtnEl);
+    containerDivEl.append(resultDivEl, textboxLabelEl, specSearchTextboxEl, moreInfoBtnEl);
 }
 
 function displayWikiSearchResults(resultDivEl, wikiSearchResults){
@@ -278,13 +281,12 @@ function displayTriviaQuestion(triviaQuestion, index){
 
     //Label for answer textbox.
     let textboxLabelEl = document.createElement('label');
-    textboxLabelEl.setAttribute('for', `answer-${index}`);
+    textboxLabelEl.setAttribute('for', `${answerTextboxID}${index}`);
 
     //Textbox for answer.
     let answerTextboxEl = document.createElement('input');
     answerTextboxEl.type = 'text';
-    answerTextboxEl.id = `answer-${index}`;
-    answerTextboxEl.value = answer;
+    answerTextboxEl.id = `${answerTextboxID}${index}`;
 
     //Hint button to dispaly wikipedia search results.
     //Creates an attribute called 'data-index'.
