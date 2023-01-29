@@ -97,14 +97,17 @@ async function searchWikipedia(hintBtnEl){
     //Using the index, gets the div element that contains the question elements (question, category, answer textbox and hint button).
     let containerDivEl = containerEl.children[index];
 
-    //Gets wikipedia result for the selected question using index number.
+    //Gets wikipedia result for the selected question using index number and search string as question + answer.
     let searchString = `${triviaQuestions[index].question} + ${triviaQuestions[index].answer}`
     let wikiSearchResults = await getWikipediaSearchResults(searchString);
-    if(typeof(wikiSearchResults) === 'undefined'){
-        return;
+
+    //Checks if any search result is obtained or not.  
+    if(wikiSearchResults.query.search.length === 0){
+
+        //Re-searches wikipedia using search string as answer only.
+        searchString = `${triviaQuestions[index].answer}`;
+        wikiSearchResults = await getWikipediaSearchResults(searchString);
     }
-    
-    console.log(wikiSearchResults);
 
     //Displays results in browser.
     displayHint(containerDivEl, wikiSearchResults, index);
@@ -117,7 +120,10 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      let resultDivEl = document.createElement('div');
      resultDivEl.id = `${hintDivID}${index}`;
 
-     displayWikiSearchResults(resultDivEl, wikiSearchResults);
+     //Displays search results of wikipedia search results are obtained.
+     if(wikiSearchResults.query.search.length > 0){
+        displayWikiSearchResults(resultDivEl, wikiSearchResults);
+     }
 
      //Label for answer textbox.
      let textboxLabelEl = document.createElement('label');
