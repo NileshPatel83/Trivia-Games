@@ -1,9 +1,9 @@
 
-
-@media screen and (max-width:768px) {
-    .category-narrow{
-        display: hidden;
-
-    }
+/* check answer color class */
+.correct {
+    background-color: greenyellow;
 }
 
+.incorrect {
+    background-color: rgb(243, 113, 113);
+}

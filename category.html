@@ -11,16 +11,18 @@
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    
+   
+    <link rel="stylesheet" href="assets/css/category.css">
 
     <title>Trivia-Game</title>
 </head>
 <body>
   <header>
-    <nav class="navbar is-link py-4 has-text-weight-bold is-size-5" role="navigation" aria-label="main navigation" >
+    <nav class="navbar is-link has-text-weight-bold is-size-5" role="navigation" aria-label="main navigation" >
       <div class="navbar-brand">
         <a class="navbar-item" href="#">
-          <img src="assets/images/logo.png" width="100" height="100">
+          <img src="assets/images/5minute.png">
         </a>
 
         <div role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
@@ -74,282 +76,147 @@
     </nav>
   </header>
 
-  <main class="section">
+  <main class="section mx-6 pt-3">
     <div class="columns is-multiline">
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd ">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="language">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Language
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image is-sqaure">
+              <img src="assets/images/logo.png" alt="language photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered has-text-weight-bold ">
-            50 of 100 to get a badge   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3></h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined has-text-weight-bold" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Sciencenature">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Science & Nature
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="sciencenature photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Entertainment">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Entertainment
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Entertainment photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Geography">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Geography
+              </h2>
+            </header>
 
-      
-
-     
-
-
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">   
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
-
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Geography photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Toygames">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Toy & Games
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Toygames photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Mathematics">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Mathematics
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Mathematics photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Religionmythology">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Religion & Mythology
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Religionmythology photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
+        </label>
       </div>
 
-      <div class="column is-12-mobile is-4-tablet is-3-desktop is-3-widescreen is-3-fullhd">
-        <div class="card">
-          <header class="card-header has-background-info">
-            <h2 class="card-header-title is-centered has-text-white">
-              Category name
-            </h2> 
-          </header>
+      <div class="column is-12-mobile is--tablet is-3-desktop is-3-widescreen is-3-fullhd">
+        <label class="checkboxContainer">
+          <input type="checkbox" class="category-checkbox" value="Sportsleisure">
+          <div class="card">
+            <header class="card-header has-background-info">
+              <h2 class="card-header-title is-centered has-text-white">
+                Sports & Leisure
+              </h2>
+            </header>
 
-          <div class="card-image">
-            <img src="assets/images/logo.png" alt="#"> <!--add category photo -->
+            <div class="card-image">
+              <img src="assets/images/logo.png" alt="Sportsleisure photo">
+            </div>     
           </div>
-
-          <p id="progressText" class="has-text-centered">
-            Complete 1 of 100   <!--add text using js -->
-          </p>
-
-          <div id="progressBar">
-            <div id="progressBarFull">
-              <h3>bar **%</h3> <!--add  progress bar width % using js -->
-            </div>  
-          </div>
-
-          <footer class="card-footer saveButton">
-            <button class="button is-info is-outlined" onclick=""> <!--add onclick js -->
-              <span>Save</span>
-              <span class="icon is-normal">
-                <i class="fas fa-check"></i>
-              </span>
-            </button>                            
-          </footer>
-        </div>             
-      </div>
+        </label>
+      </div>    
     </div>
 
     <div class="buttons saveButton">
-      <button class="button saveButton is-info is-large is-responsive">Let's Start!</button>
+      <button class="button is-info is-large is-responsive" id="saveButton">Let's Start!</button>
     </div>
   </main>
 

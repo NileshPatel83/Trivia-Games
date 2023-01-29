@@ -90,7 +90,7 @@ function displayHint(containerDivEl, wikiSearchResults){
         titleEl.textContent = searchResult.title;
 
         //Creates a paragraph element to display wikipedia snippet.
-        //First gets the parapgrapg inner HTML as search snippet and then
+        //First gets the paragraph inner HTML as search snippet and then
         //Resets it using paragraph textcontent.
         //This is to remove all HTML tags contained in search snippet received from wikipedia.
         let paraEl = document.createElement('p');
