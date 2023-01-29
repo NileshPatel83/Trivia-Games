@@ -7,9 +7,6 @@ const triviaQueryURL = 'https://api.api-ninjas.com/v1/trivia';
 //Wikipedia query URL.
 const wikipediaQueryURL = 'https://en.wikipedia.org/w/api.php';
 
-//Ninja trivia category.
-const categoryArray = ['language','sciencenature','fooddrink','geography','entertainment','toysgames','music','mathematics','religionmythology','sportsleisure'];
-
 //Total questions to be asked.
 const totalQuestionNumber = 10;
 
@@ -131,8 +128,7 @@ async function getWikipediaSearchResults(triviaQuestion){
     let params = {
         action: "query",
         list: "search",
-        //srsearch: `${triviaQuestion.question} + ${triviaQuestion.answer}`,
-        srsearch: triviaQuestion.answer,
+        srsearch: `${triviaQuestion.question} + ${triviaQuestion.answer}`,
         format: "json"
     };
 
@@ -205,6 +201,7 @@ function displayTriviaQuestion(triviaQuestion, index){
 
     //Creates a div that will contain question and wikipedia search results.
     let questionDivEl = document.createElement('div');
+    // questionDivEl.classList.add('box');
 
     //Creates a div for each question that will contain question, category, answer textbox and hint button.
     let innerQuestionDivEl = document.createElement('div');
@@ -212,6 +209,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     //Creates question as h2 element.
     let questionEl = document.createElement('h2');
     questionEl.textContent = question;
+    questionEl.classList.add('title', 'is-5');
 
     //Creates a div for answer textbox and label.
     let categoryEl = document.createElement('div');
@@ -220,7 +218,6 @@ function displayTriviaQuestion(triviaQuestion, index){
     //Label for answer textbox.
     let textboxLabelEl = document.createElement('label');
     textboxLabelEl.setAttribute('for', `answer-${index}`);
-    textboxLabelEl.innerHTML = 'Answer: ';
 
     //Textbox for answer.
     let answerTextboxEl = document.createElement('input');
