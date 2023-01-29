@@ -16,9 +16,6 @@ let wikipediaResultNumber = 3;
 //DOM Elements
 const containerEl = document.querySelector('#container');
 
-//Class names
-const submitButtonClass = 'submit-button';
-
 //ID names
 const startQuizButtonID = 'start-quiz-button';
 const hintButtonID = 'hint-button-';
@@ -27,6 +24,7 @@ const answerTextboxID = 'answer-';
 const specSearchTextboxID = 'spec-search-';
 const moreInfoButtonID = 'more-info-';
 const checkAnsBtnID = 'check-answer-';
+const submitBtnID = 'submit-button';
 
 //Attribute names
 const dataIndex = 'data-index';
@@ -208,20 +206,28 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      //Creates a div element that will contain all searches.
      let resultDivEl = document.createElement('div');
      resultDivEl.id = `${hintDivID}${index}`;
+     resultDivEl.className = 'mx-3 my-3 px-3 py-3';
 
      //Displays search results of wikipedia search results are obtained.
      if(wikiSearchResults.query.search.length > 0){
         displayWikiSearchResults(resultDivEl, wikiSearchResults);
      }
 
-     //Label for answer textbox.
+     //Creates a div element that contains specific search textbox and more info button.
+     let specSearchEl = document.createElement('div');
+     specSearchEl.className = 'mx-3 my-3 px-3 py-3';
+
+     //Label for specific search textbox.
      let textboxLabelEl = document.createElement('label');
      textboxLabelEl.innerHTML = 'Specific Search: ';
+     textboxLabelEl.className = 'title is-4';
 
      //Textbox for specific search.
      let specSearchTextboxEl = document.createElement('input');
      specSearchTextboxEl.type = 'text';
      specSearchTextboxEl.id = `${specSearchTextboxID}${index}`;
+     specSearchTextboxEl.placeholder = 'Type key word to search';
+    //  specSearchTextboxEl.style.display = 'inline';
 
     //Creates button element for specific wikipedia search.
     //Creates an attribute called 'data-index'.
@@ -230,9 +236,13 @@ function displayHint(containerDivEl, wikiSearchResults, index){
     moreInfoBtnEl.id = `${moreInfoButtonID}${index}`;
     moreInfoBtnEl.setAttribute(dataIndex, index);
     moreInfoBtnEl.innerHTML = 'More Info';
+    moreInfoBtnEl.className = 'button question-button is-warning has-text-weight-bold is-size-6';
+
+    //Adds specific search textbox and more info button.
+    specSearchEl.append(textboxLabelEl, specSearchTextboxEl, moreInfoBtnEl);
 
     //Adds search result div element to container div.
-    containerDivEl.append(resultDivEl, textboxLabelEl, specSearchTextboxEl, moreInfoBtnEl);
+    containerDivEl.append(resultDivEl, specSearchEl);
 }
 
 function displayWikiSearchResults(resultDivEl, wikiSearchResults){
@@ -249,10 +259,12 @@ function displayWikiSearchResults(resultDivEl, wikiSearchResults){
 
         //Creates a div element that will contains wikipedia seach title and snippet.
         let innerResultDivEl = document.createElement('div');
+        innerResultDivEl.className = 'block';
 
         //Creates question as h2 element to display wikipedia search title.
-        let titleEl = document.createElement('h2');
+        let titleEl = document.createElement('h3');
         titleEl.textContent = searchResult.title;
+        titleEl.className = 'title is-4 has-text-grey-darker';
 
         //Creates a paragraph element to display wikipedia snippet.
         //First gets the parapgrapg inner HTML as search snippet and then
@@ -261,6 +273,7 @@ function displayWikiSearchResults(resultDivEl, wikiSearchResults){
         let paraEl = document.createElement('p');
         paraEl.innerHTML = searchResult.snippet;
         paraEl.innerHTML = `${paraEl.textContent}...`;
+        paraEl.className = 'subtitle is-5';
         
         //Adds title and snippet to inner div elememnt.
         innerResultDivEl.append(titleEl, paraEl);
@@ -336,8 +349,8 @@ function processTriviaQuestions(){
     //Creates a submit button with id and class.
     let submitButtonEl = document.createElement('button');
     submitButtonEl.innerHTML = 'Submit';
-    submitButtonEl.id = submitButtonClass;
-    submitButtonEl.classList.add(submitButtonClass);
+    submitButtonEl.id = submitBtnID;
+    submitButtonEl.class = '';
     buttonDivEl.append(submitButtonEl);
 
     containerEl.append(buttonDivEl);
@@ -351,19 +364,21 @@ function displayTriviaQuestion(triviaQuestion, index){
 
     //Creates a div that will contain question and wikipedia search results.
     let questionDivEl = document.createElement('div');
-    // questionDivEl.classList.add('box');
+    questionDivEl.className = 'column is-12-mobile is-12-tablet is-12-desktop is-12-widescreen is-12-fullhd has-background-info my-3';
 
     //Creates a div for each question that will contain question, category, answer textbox and hint button.
     let innerQuestionDivEl = document.createElement('div');
+    innerQuestionDivEl.className = 'mx-3 my-3 px-3 py-3';
     
     //Creates question as h2 element.
     let questionEl = document.createElement('h2');
     questionEl.textContent = question;
-    questionEl.classList.add('title', 'is-5');
+    questionEl.className = 'title is-3 has-text-grey-darker';
 
     //Creates a div for answer textbox and label.
     let categoryEl = document.createElement('div');
     categoryEl.textContent = category;
+    categoryEl.className = 'subtitle is-4 has-text-warning has-text-weight-bold';
 
     //Label for answer textbox.
     let textboxLabelEl = document.createElement('label');
@@ -373,7 +388,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     let answerTextboxEl = document.createElement('input');
     answerTextboxEl.type = 'text';
     answerTextboxEl.id = `${answerTextboxID}${index}`;
-    answerTextboxEl.value = triviaQuestion.answer;
+    answerTextboxEl.placeholder = 'Type your answer here';
 
     //Hint button to dispaly wikipedia search results.
     //Creates an attribute called 'data-index'.
@@ -382,12 +397,14 @@ function displayTriviaQuestion(triviaQuestion, index){
     hintBtnEl.id = `${hintButtonID}${index}`;
     hintBtnEl.setAttribute(dataIndex, index);
     hintBtnEl.innerHTML = 'Hint';
+    hintBtnEl.className = 'button question-button is-warning has-text-weight-bold is-size-6';
 
     //Creates a button where user can check the answer of specific question.
     let checkAnsBtnEl = document.createElement('button');
     checkAnsBtnEl.id = `${checkAnsBtnID}${index}`;
     checkAnsBtnEl.setAttribute(dataIndex, index);
-    checkAnsBtnEl.innerHTML = 'Check Answer';
+    checkAnsBtnEl.innerHTML = 'Check';
+    checkAnsBtnEl.className = 'button question-button is-success has-text-weight-bold is-size-6';
 
     //Adds question elements to inner div.
     innerQuestionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintBtnEl, checkAnsBtnEl);
