@@ -40,6 +40,7 @@ containerEl.addEventListener('click', event => {
     //If the clicked element is hint button for question, gets wikipedia search results and
     //displays 3 results.
     if (targetEl.id === hintButtonID){
+        targetEl.disabled = true;
         searchWikipedia(targetEl);
     }
     
