@@ -8,7 +8,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    
     <link rel="stylesheet" href="assets/css/question.css">
 
     <title>Trivia-Game</title>
@@ -72,75 +72,116 @@
     </nav>
   </header>
 
-  <main>
-    <!-- <div class="columns"> -->
-      <!-- <div class="column is-narrow catergory-narrow ">
-        <div class="control has-icons-left " style="width: 200px;">
-          <div class="select">
-            <select>
-              <option selected>All Category</option>
-              <option>Select dropdown</option>
-              <option>With options</option>
-              <option>With options</option>
-              <option>With options</option>
-              <option>With options</option>
-              <option>With options</option>
-            </select>
+  <main class="section">
+    <div id="container" class="columns is-max-desktop is-flex-wrap-wrap">
+      <div class="column is-12-mobile is-12-tablet is-12-desktop is-12-widescreen is-12-fullhd has-background-info my-3">
+        <div class="mx-3 my-3 px-3 py-3">
+          <h2 class="title is-3 has-text-grey-darker">1. Which two fruits are an anagram of each other?
+          </h2>
+  
+          <div class="subtitle is-4 has-text-warning has-text-weight-bold">Category: language</div>
+  
+          <label for="answer-0"></label>
+          <input type="text" id="answer-0" placeholder="Type your answer here">
+          <button class="button question-button is-warning has-text-weight-bold is-size-6" id="hint-button"
+            data-index="0">Hint</button>
+          <button class="button question-button is-success has-text-weight-bold is-size-6" id="hint-button"
+            data-index="0">Check</button>
+  
+        </div>
+  
+        <div id="hint-result" class="mx-3 my-3 px-3 py-3">
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Michael Collins (astronaut)</h3>
+            <p class="subtitle is-5">Michael Collins (October 31, 1930 – April 28, 2021) was an American astronaut who
+              flew the Apollo 11 command module Columbia around the Moon in 1969 while 11 command module Columbia around
+              the Moon in 1969 while 11 command module Columbia around the Moon in 1969 while
+  
+            </p>
           </div>
-
-          <div class="icon is-small is-left">
-            <i class="fas fa-globe"></i>
+  
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Apollo 11</h3>
+            <p class="subtitle is-5">pilot Buzz Aldrin landed the Apollo Lunar Module Eagle on July 20, 1969, at 20:17
+              UTC, and Armstrong became the first person to step onto the Moon's surface 11 command module Columbia around
+              the Moon in 1969 while11 command module Columbia around the Moon in 1969 while
+            </p>
+          </div>
+  
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Buzz Aldrin</h3>
+            <p class="subtitle is-5">Buzz Aldrin (/ˈɔːldrɪn/; born Edwin Eugene Aldrin Jr.; January 20, 1930) is an
+              American former astronaut, engineer and fighter pilot. He made three spacewalks 11 command module Columbia
+              around the Moon in 1969 while11 command module Columbia around the Moon in 1969 while11 command module
+              Columbia around the Moon in 1969 while
+  
+            </p>
           </div>
         </div>
-      </div> -->
-
-      <div id= "container" class="column category-wide">
-        <!-- <div class="box">
-          <p class="title is-5">Flexible column</p>
-          <p class="subtitle">This column will take up the remaining space available.</p>
+  
+        <div class="mx-3 my-3 px-3 py-3">
+          <label class="title is-4">Specific Search: </label>
+          <input type="text" placeholder="Type key word to search">
+  
+          <button class="button question-button is-warning has-text-weight-bold is-size-6" id="more-info">More
+            Info</button>
         </div>
+      </div>
 
-        <div class="box">
-          <p class="title is-5">Flexible column</p>
-          <p class="subtitle">This column will take up the remaining space available.</p>
+      <div class="column is-12-mobile is-12-tablet is-12-desktop is-12-widescreen is-12-fullhd has-background-info my-3">
+        <div class="mx-3 my-3 px-3 py-3">
+          <h2 class="title is-3 has-text-grey-darker">1. Which two fruits are an anagram of each other?
+          </h2>
+  
+          <div class="subtitle is-4 has-text-warning has-text-weight-bold">Category: language</div>
+  
+          <label for="answer-0"></label>
+          <input type="text" id="answer-0" placeholder="Type your answer here">
+          <button class="button question-button is-warning has-text-weight-bold is-size-6" id="hint-button"
+            data-index="0">Hint</button>
+          <button class="button question-button is-success has-text-weight-bold is-size-6" id="hint-button"
+            data-index="0">Check</button>
+  
         </div>
-
-        <div class="box">
-          <p class="title is-5">Flexible column</p>
-          <p class="subtitle">This column will take up the remaining space available.</p>
+  
+        <div id="hint-result" class="mx-3 my-3 px-3 py-3">
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Michael Collins (astronaut)</h3>
+            <p class="subtitle is-5">Michael Collins (October 31, 1930 – April 28, 2021) was an American astronaut who
+              flew the Apollo 11 command module Columbia around the Moon in 1969 while 11 command module Columbia around
+              the Moon in 1969 while 11 command module Columbia around the Moon in 1969 while
+  
+            </p>
+          </div>
+  
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Apollo 11</h3>
+            <p class="subtitle is-5">pilot Buzz Aldrin landed the Apollo Lunar Module Eagle on July 20, 1969, at 20:17
+              UTC, and Armstrong became the first person to step onto the Moon's surface 11 command module Columbia around
+              the Moon in 1969 while11 command module Columbia around the Moon in 1969 while
+            </p>
+          </div>
+  
+          <div class="block">
+            <h3 class="title is-4 has-text-grey-darker">Buzz Aldrin</h3>
+            <p class="subtitle is-5">Buzz Aldrin (/ˈɔːldrɪn/; born Edwin Eugene Aldrin Jr.; January 20, 1930) is an
+              American former astronaut, engineer and fighter pilot. He made three spacewalks 11 command module Columbia
+              around the Moon in 1969 while11 command module Columbia around the Moon in 1969 while11 command module
+              Columbia around the Moon in 1969 while
+  
+            </p>
+          </div>
         </div>
-
-        <div class="box">
-          <p class="title is-5">Flexible column</p>
-          <p class="subtitle">This column will take up the remaining space available.</p>
+  
+        <div class="mx-3 my-3 px-3 py-3">
+          <label class="title is-4">Specific Search: </label>
+          <input type="text" placeholder="Type key word to search">
+  
+          <button class="button question-button is-warning has-text-weight-bold is-size-6" id="more-info">More
+            Info</button>
         </div>
-
-        <div class="box">
-          <p class="title is-5">Flexible column</p>
-          <p class="subtitle">This column will take up the remaining space available.</p>
-        </div> -->
-        
-
-        <!--reference to add js to pagination https://webdesign.tutsplus.com/tutorials/pagination-with-vanilla-javascript--cms-41896 -->
-        <!-- <nav class="pagination" role="navigation" aria-label="pagination">
-          <a class="pagination-previous is-disabled" title="This is the first page">Previous</a>
-          <a class="pagination-next">Next page</a>
-          <ul class="pagination-list">
-            <li>
-              <a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 2">2</a>
-            </li>
-            <li>
-              <a class="pagination-link" aria-label="Goto page 3">3</a>
-            </li>
-          </ul>
-        </nav> -->
-
-        
-      </div>  
-    <!-- </div> -->
+      </div>
+    </div>
   </main>
 
 
