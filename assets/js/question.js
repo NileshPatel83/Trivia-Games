@@ -22,7 +22,8 @@ const submitButtonClass = 'submit-button';
 //ID names
 const startQuizButtonID = 'start-quiz-button';
 const hintButtonID = 'hint-button';
-
+const hintDivID = 'hint-result';
+const moreInfoButtonID = 'more-info';
 //Attribute names
 const dataIndex = 'data-index';
 
@@ -42,10 +43,19 @@ containerEl.addEventListener('click', event => {
     if (targetEl.id === hintButtonID){
         targetEl.disabled = true;
         searchWikipedia(targetEl);
+    } else if (targetEl.id === moreInfoButtonID){
+        deleteWikiSearch();
     }
-    
+        
 });
 
+function deleteWikiSearch(){
+    const hintDivEl = document.getElementById(hintDivID);
+    let searchResults = Array.from(hintDivEl.children);
+    searchResults.forEach(child=>{
+        child.remove();
+    });
+}
 //Searches wikipedia and gets the results and displays results.
 async function searchWikipedia(hintBtnEl){
 
@@ -76,6 +86,8 @@ function displayHint(containerDivEl, wikiSearchResults){
 
     //Creates a div element that will contain all searches.
     let resultDivEl = document.createElement('div');
+    resultDivEl.id = hintDivID;
+
 
     //Loop through wikipedia searches.
     for (let i = 0; i < wikipediaResultNumber; i++) {
@@ -115,6 +127,7 @@ function displayHint(containerDivEl, wikiSearchResults){
 
      let submitButtonEl = document.createElement('button');
      submitButtonEl.innerHTML = 'More Info';
+     submitButtonEl.id = moreInfoButtonID;
 
     //Adds search result div element to container div.
     containerDivEl.append(resultDivEl, textboxLabelEl, answerTextboxEl, submitButtonEl);
