@@ -64,7 +64,7 @@ containerEl.addEventListener('click', event => {
         targetEl.disabled = true;
 
         processUserAnswer(targetEl);
-    }
+    } 
 });
 
 
@@ -103,17 +103,10 @@ function processUserAnswer(checkAnsBtnEl){
         innerQuestionDivEl.append(answerDivEl);
     }
 
-    //Using the index, gets specific search textbox element and disables it if found.
+    //Using the index, gets specific search textbox element and resets the texts to empty string.
     let specSearchTextboxEl = document.getElementById(`${specSearchTextboxID}${index}`);
     if(specSearchTextboxEl !== null){
         specSearchTextboxEl.value = '';
-        specSearchTextboxEl.disabled = true;
-    }
-
-    //Using the index, gets more info element and disables it if found.
-    let moreInfoBtnEl = document.getElementById(`${moreInfoButtonID}${index}`);
-    if(moreInfoBtnEl !== null){
-        moreInfoBtnEl.disabled = true;
     }
 }
 
@@ -146,6 +139,9 @@ function processSpecificSearch(moreInfoBtnEl){
 
     //Searches wikipedia for specific text and displays search results.
     displayMoreInfoSearch(resultDivEl, searchString);
+
+    //Resets the specific search textbox to empty string.
+    specSearchTextboxEl.value = '';
 }
 
 //Searches wikipedia for specific text and displays search results.
@@ -159,7 +155,6 @@ async function displayMoreInfoSearch(resultDivEl, searchString){
 
     //Displays wikipedia results with new searches.
     displayWikiSearchResults(resultDivEl, wikiSearchResults);
-
 }
 
 //Deletes wikipedia search results for specified question.
@@ -195,6 +190,8 @@ async function searchWikipedia(hintBtnEl){
         searchString = `${triviaQuestions[index].answer}`;
         wikiSearchResults = await getWikipediaSearchResults(searchString);
     }
+
+    console.log(wikiSearchResults);
 
     //Displays results in browser.
     displayHint(containerDivEl, wikiSearchResults, index);
@@ -345,13 +342,15 @@ function processTriviaQuestions(){
 
     //Creates a div a submit button.
     let buttonDivEl = document.createElement('div');
+    buttonDivEl.className = 'buttons saveButton is-justify-content-center';
 
     //Creates a submit button with id and class.
-    let submitButtonEl = document.createElement('button');
-    submitButtonEl.innerHTML = 'Submit';
-    submitButtonEl.id = submitBtnID;
-    submitButtonEl.class = '';
-    buttonDivEl.append(submitButtonEl);
+    let submitBtnEl = document.createElement('button');
+    submitBtnEl.innerHTML = 'Submit';
+    submitBtnEl.id = submitBtnID;
+    submitBtnEl.className = 'button is-info is-large is-responsive';
+
+    buttonDivEl.append(submitBtnEl);
 
     containerEl.append(buttonDivEl);
 }
@@ -404,7 +403,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     checkAnsBtnEl.id = `${checkAnsBtnID}${index}`;
     checkAnsBtnEl.setAttribute(dataIndex, index);
     checkAnsBtnEl.innerHTML = 'Check';
-    checkAnsBtnEl.className = 'button question-button is-success has-text-weight-bold is-size-6';
+    checkAnsBtnEl.className = 'button question-button is-success has-text-weight-bold is-size-6 mx-3';
 
     //Adds question elements to inner div.
     innerQuestionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintBtnEl, checkAnsBtnEl);
