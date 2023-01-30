@@ -35,7 +35,7 @@ categoryCheckboxes.forEach(checkbox => {
             //Adds category name.
             storage.categoryNames.push(categoryHeadingEl.innerText);
         } else {
-            const index = selectedCategories.indexOf(event.target.value);
+            const index = storage.selectedCategories.indexOf(event.target.value);
             if (index > -1) {
 
                 //Removes the category and its name.
