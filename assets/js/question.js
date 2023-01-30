@@ -313,14 +313,19 @@ async function init(){
 
     let allQuestions = [];
 
+    //Gets the name of local storage key from path.
+    let storageKey = getLocalStorageKeyName();
+
+    
+
     //Gets list of categories selected by the user.
-    let category = ['language','sciencenature','fooddrink'];
+    let selectedCategories = ['language','sciencenature','fooddrink'];
 
     //Loops thorugh the selected categories to get 10 questions for each category.
-    for (let i = 0; i < category.length; i++) {
+    for (let i = 0; i < selectedCategories.length; i++) {
 
         //Gets the list of questions from ninja trivia for the specified category.
-        let categoryQuestions = await getTriviaQuestions(category[i]);
+        let categoryQuestions = await getTriviaQuestions(selectedCategories[i]);
         if(typeof(categoryQuestions) === 'undefined'){
             return;
         }
@@ -336,6 +341,18 @@ async function init(){
     
     //Processes trivia questions.
     processTriviaQuestions();
+}
+
+//Gets the name of local storage key from path.
+function getLocalStorageKeyName(){
+
+    //Gets search string.
+    let querySearch = window.location.search;
+
+    //Gets the name of local storage key.
+    querySearch = querySearch.substring(querySearch.indexOf('=') + 1);
+
+    return querySearch;
 }
 
 //Processes trivia questions.
