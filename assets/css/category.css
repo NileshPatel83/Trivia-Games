@@ -52,6 +52,14 @@
 
 }
 
+footer a{
+    color:#fff;
+    line-height: 1.5;
+}
+
+footer address {
+    line-height: 1.5;
+}
 .fixed-square {
     position: fixed;
     bottom: 0px;
