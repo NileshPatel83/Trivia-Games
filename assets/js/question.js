@@ -64,9 +64,16 @@ containerEl.addEventListener('click', event => {
         targetEl.disabled = true;
 
         processUserAnswer(targetEl);
-    } 
+    
+    //If the clicked element is submit button.
+    } else if (targetEl.id.indexOf(submitBtnID) !== -1){
+        updateGameScore();
+    }
 });
 
+function updateGameScore(){
+    
+}
 
 //Processes user answer.
 function processUserAnswer(checkAnsBtnEl){
@@ -81,6 +88,7 @@ function processUserAnswer(checkAnsBtnEl){
     //Gets user answer and removes white spaces from start and end.
     let userAnswer = answerTextboxEl.value;
     userAnswer = userAnswer.trim().toLowerCase();
+
 
     let correctAnswer = triviaQuestions[index].answer.toLowerCase();
 
@@ -103,6 +111,9 @@ function processUserAnswer(checkAnsBtnEl){
         answerDivEl.className = 'subtitle is-4 has-text-warning has-text-weight-bold mt-3';
         innerQuestionDivEl.append(answerDivEl);
     }
+
+    //Disables the answer textbox so that user cannot retype the value.
+    answerTextboxEl.disabled = true;
 
     //Using the index, gets specific search textbox element and resets the texts to empty string.
     let specSearchTextboxEl = document.getElementById(`${specSearchTextboxID}${index}`);
