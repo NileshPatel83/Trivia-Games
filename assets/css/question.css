@@ -53,3 +53,11 @@ input[type=text]:focus {
     box-shadow: 0 0.4rem 1.4rem 0 #ffdd57;
 }
 
+footer a{
+    color:#fff;
+    line-height: 1.5;
+}
+
+footer address {
+    line-height: 1.5;
+}
