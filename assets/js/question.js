@@ -317,10 +317,10 @@ async function init(){
     let storageKey = getLocalStorageKeyName();
 
     //Gets the local storage for trivia games.
-    let localStorage = getLocalScheduleStorage(storageKey);
+    let gameStorage = getLocalStorage(storageKey);
 
     //Gets list of categories selected by the user.
-    let selectedCategories = getSelectedCategories(localStorage);
+    let selectedCategories = getSelectedCategories(gameStorage);
 
     //Loops thorugh the selected categories to get 10 questions for each category.
     for (let i = 0; i < selectedCategories.length; i++) {
@@ -333,6 +333,9 @@ async function init(){
 
         //Adds category quetions to the final list.
         categoryQuestions.forEach(question => {
+
+            //Updates category name to card value in category.html page.
+            question.category = gameStorage.categoryNames[i];
             allQuestions.push(question);
         });           
     }
@@ -345,21 +348,20 @@ async function init(){
 }
 
 //Gets list of categories selected by the user.
-function getSelectedCategories(localStorage){
+function getSelectedCategories(gameStorage){
 
     let selectedCategories = [];
 
     //Loop through selected categories to get selected category list.
-    for (let i = 0; i < localStorage.selectedCategories.length; i++) {
-        selectedCategories.push(localStorage.selectedCategories[i]);
-        
+    for (let i = 0; i < gameStorage.selectedCategories.length; i++) {
+        selectedCategories.push(gameStorage.selectedCategories[i]);      
     }
 
     return selectedCategories;
 }
 
 //Gets the local storage for trivia games.
-function getLocalScheduleStorage(storageKey){
+function getLocalStorage(storageKey){
 
     let gameStorage = [];
 
