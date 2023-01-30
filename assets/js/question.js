@@ -320,7 +320,7 @@ async function init(){
     let localStorage = getLocalScheduleStorage(storageKey);
 
     //Gets list of categories selected by the user.
-    let selectedCategories = ['language','sciencenature','fooddrink'];
+    let selectedCategories = getSelectedCategories(localStorage);
 
     //Loops thorugh the selected categories to get 10 questions for each category.
     for (let i = 0; i < selectedCategories.length; i++) {
@@ -342,6 +342,20 @@ async function init(){
     
     //Processes trivia questions.
     processTriviaQuestions();
+}
+
+//Gets list of categories selected by the user.
+function getSelectedCategories(localStorage){
+
+    let selectedCategories = [];
+
+    //Loop through selected categories to get selected category list.
+    for (let i = 0; i < localStorage.selectedCategories.length; i++) {
+        selectedCategories.push(localStorage.selectedCategories[i]);
+        
+    }
+
+    return selectedCategories;
 }
 
 //Gets the local storage for trivia games.
