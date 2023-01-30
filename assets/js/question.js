@@ -259,18 +259,25 @@ function displayWikiSearchResults(resultDivEl, wikiSearchResults){
         let innerResultDivEl = document.createElement('div');
         innerResultDivEl.className = 'block';
 
-        //Creates question as h2 element to display wikipedia search title.
-        let titleEl = document.createElement('h3');
-        titleEl.textContent = searchResult.title;
+        //Creates question an anchore element to display wikipedia search title.
+        //Adds a link to wikipedia page.
+        let titleEl = document.createElement('a');
+        titleEl.setAttribute('href',`http://en.wikipedia.org/?curid=${searchResult.pageid}`);
+        titleEl.setAttribute('target','_blank');
+        titleEl.innerText = searchResult.title;
+        titleEl.style.display = 'block';
         titleEl.className = 'title is-4 has-text-grey-darker';
 
         //Creates a paragraph element to display wikipedia snippet.
         //First gets the parapgrapg inner HTML as search snippet and then
         //Resets it using paragraph textcontent.
         //This is to remove all HTML tags contained in search snippet received from wikipedia.
+        //Also makes the first character upper case.
         let paraEl = document.createElement('p');
         paraEl.innerHTML = searchResult.snippet;
-        paraEl.innerHTML = `${paraEl.textContent}...`;
+        let content = paraEl.textContent;
+        content = content.charAt(0).toUpperCase() + content.substring(1) + '...';
+        paraEl.innerHTML = content;
         paraEl.className = 'subtitle is-5';
         
         //Adds title and snippet to inner div elememnt.
