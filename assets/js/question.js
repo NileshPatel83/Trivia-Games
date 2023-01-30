@@ -316,7 +316,8 @@ async function init(){
     //Gets the name of local storage key from path.
     let storageKey = getLocalStorageKeyName();
 
-    
+    //Gets the local storage for trivia games.
+    let localStorage = getLocalScheduleStorage(storageKey);
 
     //Gets list of categories selected by the user.
     let selectedCategories = ['language','sciencenature','fooddrink'];
@@ -341,6 +342,21 @@ async function init(){
     
     //Processes trivia questions.
     processTriviaQuestions();
+}
+
+//Gets the local storage for trivia games.
+function getLocalScheduleStorage(storageKey){
+
+    let gameStorage = [];
+
+    //Gets the schedule storage and converts it into an array of objects.
+    let storage = localStorage.getItem(storageKey);   
+    if(storage !== null){
+        gameStorage = JSON.parse(storage);
+    }
+  
+    //Returns the storage.
+    return gameStorage;
 }
 
 //Gets the name of local storage key from path.
