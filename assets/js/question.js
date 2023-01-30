@@ -192,8 +192,6 @@ async function searchWikipedia(hintBtnEl){
         wikiSearchResults = await getWikipediaSearchResults(searchString);
     }
 
-    console.log(wikiSearchResults);
-
     //Displays results in browser.
     displayHint(containerDivEl, wikiSearchResults, index);
 }
