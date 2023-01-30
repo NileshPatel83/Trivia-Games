@@ -100,6 +100,7 @@ function processUserAnswer(checkAnsBtnEl){
 
         let answerDivEl = document.createElement('div');
         answerDivEl.textContent = `Correct Answer: ${triviaQuestions[index].answer}`;
+        answerDivEl.className = 'subtitle is-4 has-text-warning has-text-weight-bold mt-3';
         innerQuestionDivEl.append(answerDivEl);
     }
 
@@ -377,7 +378,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     //Creates a div for answer textbox and label.
     let categoryEl = document.createElement('div');
     categoryEl.textContent = category;
-    categoryEl.className = 'subtitle is-4 has-text-warning has-text-weight-bold';
+    categoryEl.className = 'subtitle is-4 has-text-light has-text-weight-bold';
 
     //Label for answer textbox.
     let textboxLabelEl = document.createElement('label');
@@ -388,6 +389,7 @@ function displayTriviaQuestion(triviaQuestion, index){
     answerTextboxEl.type = 'text';
     answerTextboxEl.id = `${answerTextboxID}${index}`;
     answerTextboxEl.placeholder = 'Type your answer here';
+    answerTextboxEl.className = 'mx-0';
 
     //Hint button to dispaly wikipedia search results.
     //Creates an attribute called 'data-index'.
@@ -396,14 +398,14 @@ function displayTriviaQuestion(triviaQuestion, index){
     hintBtnEl.id = `${hintButtonID}${index}`;
     hintBtnEl.setAttribute(dataIndex, index);
     hintBtnEl.innerHTML = 'Hint';
-    hintBtnEl.className = 'button question-button is-warning has-text-weight-bold is-size-6';
+    hintBtnEl.className = 'button question-button is-warning has-text-weight-bold is-size-6 mx-3';
 
     //Creates a button where user can check the answer of specific question.
     let checkAnsBtnEl = document.createElement('button');
     checkAnsBtnEl.id = `${checkAnsBtnID}${index}`;
     checkAnsBtnEl.setAttribute(dataIndex, index);
     checkAnsBtnEl.innerHTML = 'Check';
-    checkAnsBtnEl.className = 'button question-button is-success has-text-weight-bold is-size-6 mx-3';
+    checkAnsBtnEl.className = 'button question-button is-success has-text-weight-bold is-size-6';
 
     //Adds question elements to inner div.
     innerQuestionDivEl.append(questionEl, categoryEl, textboxLabelEl, answerTextboxEl, hintBtnEl, checkAnsBtnEl);
