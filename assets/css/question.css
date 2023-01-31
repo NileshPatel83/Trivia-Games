@@ -7,18 +7,19 @@
 /* check answer color class */
 /*need JS */
 .correct {
-    background-color: greenyellow;
+    background-color: #90EE90;
+    color: white;
 }
 
 .incorrect {
-    background-color: rgb(243, 113, 113);
+    background-color: #FFCCCB;
 }
 
 
 
 #hint-result {
-    border-top: solid 2px #ffdd57;
-    border-bottom: solid 2px #ffdd57;
+    border-top: solid 2px #FFD53D;
+    border-bottom: solid 2px #FFD53D;
 
 }
 
@@ -50,6 +51,6 @@ input[type=text]:focus {
 
 .question-button :hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 #ffdd57;
+    box-shadow: 0 0.4rem 1.4rem 0 #FFD53D;
 }
 
