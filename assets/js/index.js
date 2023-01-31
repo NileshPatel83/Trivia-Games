@@ -11,31 +11,34 @@ const levelDivider = 50;
 //DOM Elements
 const magicBoxEl = $('#magicBox');
 
-init()
-
-//Click event for start button.
-$('#startButton').on('click', generateQueryURL)
-
-function generateQueryURL(){
-
-    // Redirect the user to the "category.html" page and passes storage key name as query.
-    //This key name will be used in category.js to retrive and update local storage.
-    window.location.replace(`category.html?key=${storageKey}`);
+//Create local storage object with initial values.
+let storage = {
+    selectedCategories:[],
+    categoryNames:[],
+    totalScore:0,
 }
+
+init()
 
 function init(){
 
+    //Gets the local storage for trivia games.
+    let gameStorage = getLocalStorage();
+
+    //If local storage doesn't exist, create a new storage.
+    if(gameStorage === null){
+        addUpdateLocalStorage(storage);
+        gameStorage = storage;
+    }
+
     //Updates game score.
-    updateGameScore(storageKey);
+    updateGameScore(gameStorage);
 
     magicBoxEl.draggable();
 }
 
 //Updates game score.
-function updateGameScore(storageKey){
-
-    //Gets the local storage for trivia games.
-    let gameStorage = getLocalStorage(storageKey);
+function updateGameScore(gameStorage){
 
     //Gets the points remaining to next level.
     let toNextLevel = levelDivider - (gameStorage.totalScore % levelDivider);
@@ -64,12 +67,17 @@ function updateGameScore(storageKey){
 
     levelDivOuterEl.append(levelDivEl);
 
-    //Adds coin images based on current level.
-    addLevelCoins(levelDivOuterEl, currentLevel);
+    //Adds coin images if current level is greater than 0.
+    //Otherwise displays level as 0.
+    if(currentLevel > 0){
+        addLevelCoins(levelDivOuterEl, currentLevel);
+    } else{
+        levelDivEl.textContent = 'Level: 0';
+    }
 
     //Creates div to display remaining points to next elvel.
     let nextLevelInfoDivEl = document.createElement('div');
-    nextLevelInfoDivEl.textContent = `(${toNextLevel} points away from Level: ${(currentLevel + 1)})`;
+    nextLevelInfoDivEl.textContent = `(${toNextLevel} point(s) away from Level: ${(currentLevel + 1)})`;
     nextLevelInfoDivEl.style.display = 'flex';
     nextLevelInfoDivEl.style.backgroundColor = 'transparent';
     nextLevelInfoDivEl.className = 'has-text-weight-bold is-size-5 mt-3 mx-3';
@@ -93,16 +101,23 @@ function addLevelCoins(levelDivOuterEl, currentLevel){
     }
 }
 
+//Adds/updates local storage.
+function addUpdateLocalStorage(storage){
+  localStorage.setItem(storageKey, JSON.stringify(storage));
+}
+
 //Gets the local storage for trivia games.
-function getLocalStorage(storageKey){
+function getLocalStorage(){
 
     let gameStorage = [];
 
     //Gets the schedule storage and converts it into an array of objects.
     let storage = localStorage.getItem(storageKey);   
-    if(storage !== null){
-        gameStorage = JSON.parse(storage);
+    if(storage === null){
+        return null;
     }
+
+    gameStorage = JSON.parse(storage);
   
     //Returns the storage.
     return gameStorage;
