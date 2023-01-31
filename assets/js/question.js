@@ -136,11 +136,11 @@ function processUserAnswer(checkAnsBtnEl){
     if(isCorrectAnser(index, answerTextboxEl)){
 
         //Sets answer textbox background color to green, if user answer if correct.
-        answerTextboxEl.style.background = 'green';
-    } else{
+        answerTextboxEl.style.background = '#90EE90';
+    }else{
 
         //Sets answer textbox background color to red, if user answer if correct.
-        answerTextboxEl.style.background = 'red';
+        answerTextboxEl.style.background = '#FFCCCB';
 
         //Adds a dive element to display correct answer.
         let innerQuestionDivEl = checkAnsBtnEl.parentElement;
