@@ -15,6 +15,7 @@ let wikipediaResultNumber = 3;
 
 //DOM Elements
 const containerEl = document.querySelector('#container');
+const loaderEL =  document.querySelector('#loader');
 
 //ID names
 const startQuizButtonID = 'start-quiz-button';
@@ -55,12 +56,12 @@ containerEl.addEventListener('click', event => {
         processSpecificSearch(targetEl);
 
     //If the clicked element is check answer button and
-    //if the answer is correct, changes answer textbox background to gree,
+    //if the answer is correct, changes answer textbox background to green,
     //otherwise changes the background to red.
     //Also displays correct answer if user answer is wrong.
     } else if (targetEl.id.indexOf(checkAnsBtnID) !== -1){
 
-        //Disables the check answer button so that user cannot clicl it again.
+        //Disables the check answer button so that user cannot click it again.
         targetEl.disabled = true;
 
         processUserAnswer(targetEl);
@@ -96,12 +97,12 @@ function processUserAnswer(checkAnsBtnEl){
     if(userAnswer === correctAnswer){
 
         //Sets answer textbox background color to green, if user answer if correct.
-        answerTextboxEl.style.background = 'green';
+        answerTextboxEl.style.background = 'greenyellow';
     }
     else{
 
         //Sets answer textbox background color to red, if user answer if correct.
-        answerTextboxEl.style.background = 'red';
+        answerTextboxEl.style.background = 'rgb(243, 113, 113)';
 
         //Adds a dive element to display correct answer.
         let innerQuestionDivEl = checkAnsBtnEl.parentElement;
@@ -213,7 +214,7 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      //Creates a div element that will contain all searches.
      let resultDivEl = document.createElement('div');
      resultDivEl.id = `${hintDivID}${index}`;
-     resultDivEl.className = 'mx-3 my-3 px-3 py-3';
+     resultDivEl.className = 'hint-result mx-3 my-3 px-3 py-3';
 
      //Displays search results of wikipedia search results are obtained.
      if(wikiSearchResults.query.search.length > 0){
@@ -354,6 +355,9 @@ async function init(){
     //Gets list of 10 questions randomly from all questions list.
     triviaQuestions = getQuizList(allQuestions);
     
+    containerEl.classList.remove('is-hidden');
+    loaderEL. classList.add('is-hidden');
+    
     //Processes trivia questions.
     processTriviaQuestions();
 }
@@ -401,14 +405,14 @@ function getLocalStorageKeyName(){
 //Processes trivia questions.
 function processTriviaQuestions(){
     
-    //Loops through all trivial questions one by one and dispaly them in browser.
+    //Loops through all trivial questions one by one and display them in browser.
     for (let i = 0; i < triviaQuestions.length; i++) {
         displayTriviaQuestion(triviaQuestions[i], i)
     }
 
     //Creates a div a submit button.
     let buttonDivEl = document.createElement('div');
-    buttonDivEl.className = 'buttons saveButton is-justify-content-center';
+    buttonDivEl.className = 'buttons saveButton';
 
     //Creates a submit button with id and class.
     let submitBtnEl = document.createElement('button');
