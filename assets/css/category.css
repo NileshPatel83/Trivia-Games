@@ -45,7 +45,6 @@
     border: 2px solid #ddd;
     transform: scale(1.05);
     box-shadow: 0 0 5px #333;
-    z-index: -1;
     background-color: #00d1b2
 
 }
