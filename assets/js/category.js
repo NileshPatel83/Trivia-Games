@@ -1,5 +1,5 @@
 //Local storage name
-const storageKey = 'Trivia-Games';
+//const storageKey = 'Trivia-Games';
 
 let storage = {
     selectedCategories:[],

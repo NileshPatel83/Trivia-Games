@@ -33,10 +33,10 @@ const dataIndex = 'data-index';
 let triviaQuestions;
 
 // Check for click events on the navbar burger icon to add toggleClass
-document.querySelector(".navbar-burger").addEventListener('click', (function() {
-    document.querySelector(".navbar-burger").className = 'is-active';
-    document.querySelector(".navbar-menu").className = 'navbar-menu is-active';
-}));
+$(".navbar-burger").click(function() {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+});
 
 init();
 
