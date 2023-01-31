@@ -389,8 +389,6 @@ async function init(){
     //Gets list of categories selected by the user.
     let selectedCategories = getSelectedCategories(gameStorage);
 
-    loaderEL. classList.add('is-hidden');
-
     //Loops thorugh the selected categories to get 10 questions for each category.
     for (let i = 0; i < selectedCategories.length; i++) {
 
@@ -411,8 +409,6 @@ async function init(){
 
     //Gets list of 10 questions randomly from all questions list.
     triviaQuestions = getQuizList(allQuestions);
-
-    containerEl.classList.remove('is-hidden');
     
     containerEl.classList.remove('is-hidden');
     loaderEL. classList.add('is-hidden');
