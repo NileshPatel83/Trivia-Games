@@ -15,7 +15,7 @@ const magicBoxEl = $('#magicBox');
 let storage = {
     selectedCategories:[],
     categoryNames:[],
-    totalScore:115,
+    totalScore:145,
 }
 
 init()
@@ -39,6 +39,9 @@ function init(){
 
 //Updates game score.
 function updateGameScore(gameStorage){
+
+    //Removes existing elements before readds them.
+    magicBoxEl.empty();
 
     //Gets the points remaining to next level.
     let toNextLevel = levelDivider - (gameStorage.totalScore % levelDivider);
@@ -109,16 +112,11 @@ function addUpdateLocalStorage(storage){
 //Gets the local storage for trivia games.
 function getLocalStorage(){
 
-    let gameStorage = [];
-
     //Gets the schedule storage and converts it into an array of objects.
     let storage = localStorage.getItem(storageKey);   
     if(storage === null){
         return null;
     }
 
-    gameStorage = JSON.parse(storage);
-  
-    //Returns the storage.
-    return gameStorage;
+    return JSON.parse(storage);
 }

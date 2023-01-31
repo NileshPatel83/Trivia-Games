@@ -49,7 +49,7 @@ containerEl.addEventListener('click', event => {
     //If the clicked element is hint button for question, gets wikipedia search results and displays 3 results.
     if (targetEl.id.indexOf(hintButtonID) !== -1){
 
-        //Disables the hint button so that user cannot clicl it again.
+        //Disables the hint button so that user cannot click it again.
         targetEl.disabled = true;
 
         //Searches wikipedia and displays search results related to questions and/ or answer.
@@ -66,19 +66,60 @@ containerEl.addEventListener('click', event => {
     //Also displays correct answer if user answer is wrong.
     } else if (targetEl.id.indexOf(checkAnsBtnID) !== -1){
 
-        //Disables the check answer button so that user cannot clicl it again.
+        //Disables the check answer button so that user cannot click it again.
         targetEl.disabled = true;
 
         processUserAnswer(targetEl);
     
-    //If the clicked element is submit button.
+    //If the clicked element is submit button, processes the game score.
     } else if (targetEl.id.indexOf(submitBtnID) !== -1){
-        updateGameScore();
+
+        //Disables the submit button so that user cannot click it again.
+        targetEl.disabled = true;
+
+        //Processes user answers and updates the score display.
+        processGameScore();
     }
 });
 
-function updateGameScore(){
+//Processes game score.
+function processGameScore(){
 
+    let correctAnswers = getCorrectAnswerNumber();
+
+    //Gets the local storage for trivia games.
+    let gameStorage = getLocalStorage();
+
+    //Updates total score value.
+    gameStorage.totalScore += correctAnswers;
+
+    //Updates local storage
+    addUpdateLocalStorage(gameStorage);
+
+    //Updates game score dispaly.
+    updateGameScore(gameStorage);
+}
+
+function getCorrectAnswerNumber(){
+
+    let counter = 0;
+
+    for (let i = 0; i < totalQuestionNumber; i++) {
+
+        //Using the index, gets check answer button and disables it.
+        let checkAnsBtnEl = document.getElementById(`${checkAnsBtnID}${i}`);
+        checkAnsBtnEl.disabled = true;
+        
+        //Using the index, gets answer textbox element.
+        let answerTextboxEl = document.getElementById(`${answerTextboxID}${i}`);
+
+        //Compares user answer with correct answer and returns true or false.
+        if(isCorrectAnser(i, answerTextboxEl)){
+            counter++;
+        }
+    }
+
+    return counter;
 }
 
 //Processes user answer.
@@ -91,20 +132,12 @@ function processUserAnswer(checkAnsBtnEl){
     //Using the index, gets answer textbox element.
     let answerTextboxEl = document.getElementById(`${answerTextboxID}${index}`);
 
-    //Gets user answer and removes white spaces from start and end.
-    let userAnswer = answerTextboxEl.value;
-    userAnswer = userAnswer.trim().toLowerCase();
-
-
-    let correctAnswer = triviaQuestions[index].answer.toLowerCase();
-
     //Compares user answer with correct answer.
-    if(userAnswer === correctAnswer){
+    if(isCorrectAnser(index, answerTextboxEl)){
 
         //Sets answer textbox background color to green, if user answer if correct.
         answerTextboxEl.style.background = 'green';
-    }
-    else{
+    } else{
 
         //Sets answer textbox background color to red, if user answer if correct.
         answerTextboxEl.style.background = 'red';
@@ -126,6 +159,24 @@ function processUserAnswer(checkAnsBtnEl){
     if(specSearchTextboxEl !== null){
         specSearchTextboxEl.value = '';
     }
+}
+
+//Compares user answer with correct answer and return true or false.
+function isCorrectAnser(index, answerTextboxEl){
+
+    //Gets user answer and removes white spaces from start and end.
+    let userAnswer = answerTextboxEl.value;
+    userAnswer = userAnswer.trim().toLowerCase();
+
+    //Gets the correct answer for the question.
+    let correctAnswer = triviaQuestions[index].answer.toLowerCase();
+
+    //Compares user answer with correct answer.
+    if(userAnswer === correctAnswer){
+        return true;
+    } 
+    
+    return false;
 }
 
 //First, deletes current wikipedia search results.
@@ -178,12 +229,8 @@ async function displayMoreInfoSearch(resultDivEl, searchString){
 //Deletes wikipedia search results for specified question.
 function deleteWikiSearch(resultDivEl){
 
-    //Gets all direct child div elements that contains wikipedia results and removes them if found.
-    let searchResults = Array.from(resultDivEl.children);
-    if(typeof(searchResults) !== 'undefined'){
-        searchResults.forEach(child=>{
-            child.remove();
-        });
+    while (resultDivEl.hasChildNodes()){
+        resultDivEl.removeChild(resultDivEl.firstChild);
     }
 }
 
@@ -343,8 +390,6 @@ async function init(){
 
     //Gets the local storage for trivia games.
     let gameStorage = getLocalStorage();
-
-    console.log(gameStorage);
 
     //Gets list of categories selected by the user.
     let selectedCategories = getSelectedCategories(gameStorage);
