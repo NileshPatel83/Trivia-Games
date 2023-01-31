@@ -224,6 +224,12 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      //Displays search results of wikipedia search results are obtained.
      if(wikiSearchResults.query.search.length > 0){
         displayWikiSearchResults(resultDivEl, wikiSearchResults);
+     } else{
+        let divEl = document.createElement('div');
+        divEl.style.display = 'block';
+        divEl.className = 'title is-4 has-text-grey-darker';
+        divEl.textContent = 'Sorry, failed to find Wikipedia searches.';
+        resultDivEl.append(divEl)
      }
 
      //Creates a div element that contains specific search textbox and more info button.
@@ -240,7 +246,6 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      specSearchTextboxEl.type = 'text';
      specSearchTextboxEl.id = `${specSearchTextboxID}${index}`;
      specSearchTextboxEl.placeholder = 'Type key word to search';
-    //  specSearchTextboxEl.style.display = 'inline';
 
     //Creates button element for specific wikipedia search.
     //Creates an attribute called 'data-index'.
@@ -328,13 +333,18 @@ async function getWikipediaSearchResults(searchString){
 //Initial function when the page is loaded.
 async function init(){
 
+    //Creates a div displaying "Loading.." untils questions are displayed.
+    let tempDivEl = createLoadingDiv();
+
     let allQuestions = [];
 
     //Gets the name of local storage key from path.
-    let storageKey = getLocalStorageKeyName();
+    //let storageKey = getLocalStorageKeyName();
 
     //Gets the local storage for trivia games.
-    let gameStorage = getLocalStorage(storageKey);
+    let gameStorage = getLocalStorage();
+
+    console.log(gameStorage);
 
     //Gets list of categories selected by the user.
     let selectedCategories = getSelectedCategories(gameStorage);
@@ -359,9 +369,23 @@ async function init(){
 
     //Gets list of 10 questions randomly from all questions list.
     triviaQuestions = getQuizList(allQuestions);
+
+    tempDivEl.remove();
     
     //Processes trivia questions.
     processTriviaQuestions();
+}
+
+//Creates a div displaying "Loading.." untils questions are displayed.
+function createLoadingDiv(){
+    let tempDivEl = document.createElement('div');
+    tempDivEl.textContent = 'Loading...';
+    tempDivEl.style.margin = '0 auto';
+    tempDivEl.className = 'title is-2 has-text-grey-darker is-justify-content-center';
+
+    containerEl.append(tempDivEl);
+
+    return tempDivEl;
 }
 
 //Gets list of categories selected by the user.
@@ -377,33 +401,6 @@ function getSelectedCategories(gameStorage){
     return selectedCategories;
 }
 
-//Gets the local storage for trivia games.
-function getLocalStorage(storageKey){
-
-    let gameStorage = [];
-
-    //Gets the schedule storage and converts it into an array of objects.
-    let storage = localStorage.getItem(storageKey);   
-    if(storage !== null){
-        gameStorage = JSON.parse(storage);
-    }
-  
-    //Returns the storage.
-    return gameStorage;
-}
-
-//Gets the name of local storage key from path.
-function getLocalStorageKeyName(){
-
-    //Gets search string.
-    let querySearch = window.location.search;
-
-    //Gets the name of local storage key.
-    querySearch = querySearch.substring(querySearch.indexOf('=') + 1);
-
-    return querySearch;
-}
-
 //Processes trivia questions.
 function processTriviaQuestions(){
     
@@ -414,13 +411,14 @@ function processTriviaQuestions(){
 
     //Creates a div a submit button.
     let buttonDivEl = document.createElement('div');
+    buttonDivEl.style.margin = '0 auto';
     buttonDivEl.className = 'buttons saveButton is-justify-content-center';
 
     //Creates a submit button with id and class.
     let submitBtnEl = document.createElement('button');
     submitBtnEl.innerHTML = 'Submit';
     submitBtnEl.id = submitBtnID;
-    submitBtnEl.className = 'button is-info is-large is-responsive';
+    submitBtnEl.className = 'button is-info is-large is-responsive mt-3';
 
     buttonDivEl.append(submitBtnEl);
 

@@ -40,6 +40,12 @@ const generateButton = document.querySelector('#saveButton');
 
 generateButton.addEventListener('click', function() {
 
+    //Exists the event listener if no category is selected.
+    //Question page will not be displayed.
+    if(storage.selectedCategories.length === 0){
+        return;
+    }
+
     // Save the selected categories in local storage
     localStorage.setItem(storageKey, JSON.stringify(storage));
 
