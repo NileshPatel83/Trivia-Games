@@ -21,8 +21,8 @@
   <header>
     <nav class="navbar is-link has-text-weight-bold is-size-5" role="navigation" aria-label="main navigation" >
       <div class="navbar-brand">
-        <a class="navbar-item" href="#">
-          <img src="assets/images/5minute.png">
+        <a class="navbar-item py-0" href="index.html">
+          <img src="assets/images/logo-nav-2.png" width="190" height="30">
         </a>
 
         <div role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navMenu">
@@ -34,10 +34,10 @@
 
       <div class="navbar-menu" id="navMenu">
         <div class="navbar-start">
-          <a class="navbar-item">Home</a>
+          <a class="navbar-item" href="index.html">Home</a>
 
           <div class="navbar-item has-dropdown is-hoverable">
-            <a class="navbar-link is-arrowless">Category</a>
+            <a class="navbar-link is-arrowless" href="category.html">Category</a>
             <div class="navbar-dropdown">
               <a class="navbar-item">option</a>
               <a class="navbar-item">option</a>
@@ -49,7 +49,7 @@
             <a class="navbar-link">More</a>
             <div class="navbar-dropdown">
               <a class="navbar-item">About us</a>
-              <a class="navbar-item">Contact</a>
+              <a class="navbar-item" href="#footer">Contact</a>
               <hr class="navbar-divider">
               <a class="navbar-item">Report an issue</a>
             </div>
@@ -76,7 +76,7 @@
     </nav>
   </header>
 
-  <main class="section pt-3 has-background-primary-light">
+  <main class="container pt-4 main-container">
     <div class="columns is-multiline">
       <div class="column is-12-mobile is-6-tablet is-3-desktop is-3-widescreen is-3-fullhd ">
         <label class="checkboxContainer">
@@ -215,7 +215,7 @@
       </div>    
     </div>
 
-    <div class="buttons saveButton">
+    <div class="buttons is-justify-content-center saveButton">
       <button class="button is-info is-large is-responsive" id="saveButton">Let's Start!</button>
     </div>
 
@@ -225,14 +225,14 @@
 
   </main>
 
-  <footer class="footer has-background-link py-4">
+  <footer class="footer has-background-link py-4" id="footer">
     <div class="container has-text-white">
       <div class="columns is-mobile is-multiline is-justify-content-space-between">
         <div class="column is-half-mobile is-one-quarter-desktop">
           <h5 class="title is-4 has-text-white">Quick Links</h5>
           <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="#">Category</a></li>
+            <li><a href="category.html">Category</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Team</a></li>
             <li><a href="#">Contact</a></li>
