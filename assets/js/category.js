@@ -1,15 +1,8 @@
-//Variable for storage name
-let strKey = '';
-
-
-
 // Check for click events on the navbar burger icon to add toggleClass
 $(".navbar-burger").click(function() {
     $(".navbar-burger").toggleClass("is-active");
     $(".navbar-menu").toggleClass("is-active");
 });
-
-init();
 
 const categoryCheckboxes = document.querySelectorAll('.category-checkbox');
 
@@ -44,19 +37,21 @@ categoryCheckboxes.forEach(checkbox => {
 });
 
 const generateButton = document.querySelector('#saveButton');
+
 generateButton.addEventListener('click', function() {
+
     // Save the selected categories in local storage
-    localStorage.setItem(strKey, JSON.stringify(storage));
+    localStorage.setItem(storageKey, JSON.stringify(storage));
 
     // Redirect the user to the "questions.html" page and passes storage key name as query.
     //This key name will be used in question.js to retrive and update local storage.
-    window.location.replace(`questions.html?key=${strKey}`);
+    window.location.replace('questions.html');
 });
 
-if (localStorage.getItem(strKey)) {
+if (localStorage.getItem(storageKey)) {
 
     // get the value from local storage and puts it into an array
-    const extStorage = JSON.parse(localStorage.getItem(strKey));
+    const extStorage = JSON.parse(localStorage.getItem(storageKey));
 
     // loop through each category checkbox
     categoryCheckboxes.forEach(checkbox => {
@@ -81,22 +76,4 @@ if (localStorage.getItem(strKey)) {
             storage.categoryNames.push(categoryHeadingEl.innerText);
         }
     });
-}
-
-function init(){
-
-    //Gets the name of local storage key from path.
-    strKey = getLocalStorageKeyName();
-}
-
-//Gets the name of local storage key from path.
-function getLocalStorageKeyName(){
-
-    //Gets search string.
-    let querySearch = window.location.search;
-
-    //Gets the name of local storage key.
-    querySearch = querySearch.substring(querySearch.indexOf('=') + 1);
-
-    return querySearch;
 }
