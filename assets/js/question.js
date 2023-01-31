@@ -32,6 +32,12 @@ const dataIndex = 'data-index';
 //Array of trivia question object which contains question, answer and category.
 let triviaQuestions;
 
+// Check for click events on the navbar burger icon to add toggleClass
+$(".navbar-burger").click(function() {
+    $(".navbar-burger").toggleClass("is-active");
+    $(".navbar-menu").toggleClass("is-active");
+});
+
 init();
 
 //Event listener for div container.
@@ -43,7 +49,7 @@ containerEl.addEventListener('click', event => {
     //If the clicked element is hint button for question, gets wikipedia search results and displays 3 results.
     if (targetEl.id.indexOf(hintButtonID) !== -1){
 
-        //Disables the hint button so that user cannot clicl it again.
+        //Disables the hint button so that user cannot click it again.
         targetEl.disabled = true;
 
         //Searches wikipedia and displays search results related to questions and/ or answer.
@@ -60,19 +66,60 @@ containerEl.addEventListener('click', event => {
     //Also displays correct answer if user answer is wrong.
     } else if (targetEl.id.indexOf(checkAnsBtnID) !== -1){
 
-        //Disables the check answer button so that user cannot clicl it again.
+        //Disables the check answer button so that user cannot click it again.
         targetEl.disabled = true;
 
         processUserAnswer(targetEl);
     
-    //If the clicked element is submit button.
+    //If the clicked element is submit button, processes the game score.
     } else if (targetEl.id.indexOf(submitBtnID) !== -1){
-        updateGameScore();
+
+        //Disables the submit button so that user cannot click it again.
+        targetEl.disabled = true;
+
+        //Processes user answers and updates the score display.
+        processGameScore();
     }
 });
 
-function updateGameScore(){
-    
+//Processes game score.
+function processGameScore(){
+
+    let correctAnswers = getCorrectAnswerNumber();
+
+    //Gets the local storage for trivia games.
+    let gameStorage = getLocalStorage();
+
+    //Updates total score value.
+    gameStorage.totalScore += correctAnswers;
+
+    //Updates local storage
+    addUpdateLocalStorage(gameStorage);
+
+    //Updates game score dispaly.
+    updateGameScore(gameStorage);
+}
+
+function getCorrectAnswerNumber(){
+
+    let counter = 0;
+
+    for (let i = 0; i < totalQuestionNumber; i++) {
+
+        //Using the index, gets check answer button and disables it.
+        let checkAnsBtnEl = document.getElementById(`${checkAnsBtnID}${i}`);
+        checkAnsBtnEl.disabled = true;
+        
+        //Using the index, gets answer textbox element.
+        let answerTextboxEl = document.getElementById(`${answerTextboxID}${i}`);
+
+        //Compares user answer with correct answer and returns true or false.
+        if(isCorrectAnser(i, answerTextboxEl)){
+            counter++;
+        }
+    }
+
+    return counter;
 }
 
 //Processes user answer.
@@ -85,20 +132,12 @@ function processUserAnswer(checkAnsBtnEl){
     //Using the index, gets answer textbox element.
     let answerTextboxEl = document.getElementById(`${answerTextboxID}${index}`);
 
-    //Gets user answer and removes white spaces from start and end.
-    let userAnswer = answerTextboxEl.value;
-    userAnswer = userAnswer.trim().toLowerCase();
-
-
-    let correctAnswer = triviaQuestions[index].answer.toLowerCase();
-
     //Compares user answer with correct answer.
-    if(userAnswer === correctAnswer){
+    if(isCorrectAnser(index, answerTextboxEl)){
 
         //Sets answer textbox background color to green, if user answer if correct.
         answerTextboxEl.style.background = '#90EE90';
-    }
-    else{
+    }else{
 
         //Sets answer textbox background color to red, if user answer if correct.
         answerTextboxEl.style.background = '#FFCCCB';
@@ -120,6 +159,24 @@ function processUserAnswer(checkAnsBtnEl){
     if(specSearchTextboxEl !== null){
         specSearchTextboxEl.value = '';
     }
+}
+
+//Compares user answer with correct answer and return true or false.
+function isCorrectAnser(index, answerTextboxEl){
+
+    //Gets user answer and removes white spaces from start and end.
+    let userAnswer = answerTextboxEl.value;
+    userAnswer = userAnswer.trim().toLowerCase();
+
+    //Gets the correct answer for the question.
+    let correctAnswer = triviaQuestions[index].answer.toLowerCase();
+
+    //Compares user answer with correct answer.
+    if(userAnswer === correctAnswer){
+        return true;
+    } 
+    
+    return false;
 }
 
 //First, deletes current wikipedia search results.
@@ -172,12 +229,8 @@ async function displayMoreInfoSearch(resultDivEl, searchString){
 //Deletes wikipedia search results for specified question.
 function deleteWikiSearch(resultDivEl){
 
-    //Gets all direct child div elements that contains wikipedia results and removes them if found.
-    let searchResults = Array.from(resultDivEl.children);
-    if(typeof(searchResults) !== 'undefined'){
-        searchResults.forEach(child=>{
-            child.remove();
-        });
+    while (resultDivEl.hasChildNodes()){
+        resultDivEl.removeChild(resultDivEl.firstChild);
     }
 }
 
@@ -218,6 +271,12 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      //Displays search results of wikipedia search results are obtained.
      if(wikiSearchResults.query.search.length > 0){
         displayWikiSearchResults(resultDivEl, wikiSearchResults);
+     } else{
+        let divEl = document.createElement('div');
+        divEl.style.display = 'block';
+        divEl.className = 'title is-4 has-text-grey-darker';
+        divEl.textContent = 'Sorry, failed to find Wikipedia searches.';
+        resultDivEl.append(divEl)
      }
 
      //Creates a div element that contains specific search textbox and more info button.
@@ -234,7 +293,6 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      specSearchTextboxEl.type = 'text';
      specSearchTextboxEl.id = `${specSearchTextboxID}${index}`;
      specSearchTextboxEl.placeholder = 'Type key word to search';
-    //  specSearchTextboxEl.style.display = 'inline';
 
     //Creates button element for specific wikipedia search.
     //Creates an attribute called 'data-index'.
@@ -322,13 +380,16 @@ async function getWikipediaSearchResults(searchString){
 //Initial function when the page is loaded.
 async function init(){
 
+    //Creates a div displaying "Loading.." untils questions are displayed.
+    let tempDivEl = createLoadingDiv();
+
     let allQuestions = [];
 
     //Gets the name of local storage key from path.
-    let storageKey = getLocalStorageKeyName();
+    //let storageKey = getLocalStorageKeyName();
 
     //Gets the local storage for trivia games.
-    let gameStorage = getLocalStorage(storageKey);
+    let gameStorage = getLocalStorage();
 
     //Gets list of categories selected by the user.
     let selectedCategories = getSelectedCategories(gameStorage);
@@ -353,9 +414,23 @@ async function init(){
 
     //Gets list of 10 questions randomly from all questions list.
     triviaQuestions = getQuizList(allQuestions);
+
+    tempDivEl.remove();
     
     //Processes trivia questions.
     processTriviaQuestions();
+}
+
+//Creates a div displaying "Loading.." untils questions are displayed.
+function createLoadingDiv(){
+    let tempDivEl = document.createElement('div');
+    tempDivEl.textContent = 'Loading...';
+    tempDivEl.style.margin = '0 auto';
+    tempDivEl.className = 'title is-2 has-text-grey-darker is-justify-content-center';
+
+    containerEl.append(tempDivEl);
+
+    return tempDivEl;
 }
 
 //Gets list of categories selected by the user.
@@ -371,33 +446,6 @@ function getSelectedCategories(gameStorage){
     return selectedCategories;
 }
 
-//Gets the local storage for trivia games.
-function getLocalStorage(storageKey){
-
-    let gameStorage = [];
-
-    //Gets the schedule storage and converts it into an array of objects.
-    let storage = localStorage.getItem(storageKey);   
-    if(storage !== null){
-        gameStorage = JSON.parse(storage);
-    }
-  
-    //Returns the storage.
-    return gameStorage;
-}
-
-//Gets the name of local storage key from path.
-function getLocalStorageKeyName(){
-
-    //Gets search string.
-    let querySearch = window.location.search;
-
-    //Gets the name of local storage key.
-    querySearch = querySearch.substring(querySearch.indexOf('=') + 1);
-
-    return querySearch;
-}
-
 //Processes trivia questions.
 function processTriviaQuestions(){
     
@@ -408,13 +456,14 @@ function processTriviaQuestions(){
 
     //Creates a div a submit button.
     let buttonDivEl = document.createElement('div');
+    buttonDivEl.style.margin = '0 auto';
     buttonDivEl.className = 'buttons saveButton is-justify-content-center';
 
     //Creates a submit button with id and class.
     let submitBtnEl = document.createElement('button');
     submitBtnEl.innerHTML = 'Submit';
     submitBtnEl.id = submitBtnID;
-    submitBtnEl.className = 'button is-info is-large is-responsive';
+    submitBtnEl.className = 'button is-info is-large is-responsive mt-3';
 
     buttonDivEl.append(submitBtnEl);
 

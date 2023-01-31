@@ -1,13 +1,3 @@
-//Local storage name
-const storageKey = 'Trivia-Games';
-
-let storage = {
-    selectedCategories:[],
-    categoryNames:[],
-    totalScore:0,
-    level:0
-}
-
 // Check for click events on the navbar burger icon to add toggleClass
 $(".navbar-burger").click(function() {
     $(".navbar-burger").toggleClass("is-active");
@@ -47,13 +37,21 @@ categoryCheckboxes.forEach(checkbox => {
 });
 
 const generateButton = document.querySelector('#saveButton');
+
 generateButton.addEventListener('click', function() {
+
+    //Exists the event listener if no category is selected.
+    //Question page will not be displayed.
+    if(storage.selectedCategories.length === 0){
+        return;
+    }
+
     // Save the selected categories in local storage
     localStorage.setItem(storageKey, JSON.stringify(storage));
 
-    // Redirect the user to the "questions.html" page and passes storage ket name as query.
+    // Redirect the user to the "questions.html" page and passes storage key name as query.
     //This key name will be used in question.js to retrive and update local storage.
-    window.location.replace(`questions.html?key=${storageKey}`);
+    window.location.replace('questions.html');
 });
 
 if (localStorage.getItem(storageKey)) {
