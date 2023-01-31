@@ -50,7 +50,7 @@ generateButton.addEventListener('click', function() {
     // Save the selected categories in local storage
     localStorage.setItem(storageKey, JSON.stringify(storage));
 
-    // Redirect the user to the "questions.html" page and passes storage ket name as query.
+    // Redirect the user to the "questions.html" page and passes storage key name as query.
     //This key name will be used in question.js to retrive and update local storage.
     window.location.replace(`questions.html?key=${storageKey}`);
 });

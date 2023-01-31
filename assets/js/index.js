@@ -13,19 +13,29 @@ const magicBoxEl = $('#magicBox');
 
 init()
 
+//Click event for start button.
+$('#startButton').on('click', generateQueryURL)
+
+function generateQueryURL(){
+
+    // Redirect the user to the "category.html" page and passes storage key name as query.
+    //This key name will be used in category.js to retrive and update local storage.
+    window.location.replace(`category.html?key=${storageKey}`);
+}
+
 function init(){
 
-    //Gets the local storage for trivia games.
-    let gameStorage = getLocalStorage(storageKey);
-
     //Updates game score.
-    updateGameScore(gameStorage);
+    updateGameScore(storageKey);
 
     magicBoxEl.draggable();
 }
 
 //Updates game score.
-function updateGameScore(gameStorage){
+function updateGameScore(storageKey){
+
+    //Gets the local storage for trivia games.
+    let gameStorage = getLocalStorage(storageKey);
 
     //Gets the points remaining to next level.
     let toNextLevel = levelDivider - (gameStorage.totalScore % levelDivider);
@@ -72,7 +82,7 @@ function addLevelCoins(levelDivOuterEl, currentLevel){
 
     //Loops through current level and adds coin images accordingly.
     for (let i = 0; i < currentLevel; i++) {
-        
+
         let imageEl = document.createElement('img');
         imageEl.src = 'assets/images/coin.png';
         imageEl.style.height = '40px';
