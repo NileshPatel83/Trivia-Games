@@ -32,6 +32,12 @@ const dataIndex = 'data-index';
 //Array of trivia question object which contains question, answer and category.
 let triviaQuestions;
 
+// Check for click events on the navbar burger icon to add toggleClass
+document.querySelector(".navbar-burger").addEventListener('click', (function() {
+    document.querySelector(".navbar-burger").className = 'is-active';
+    document.querySelector(".navbar-menu").className = 'navbar-menu is-active';
+}));
+
 init();
 
 //Event listener for div container.
@@ -72,7 +78,7 @@ containerEl.addEventListener('click', event => {
 });
 
 function updateGameScore(){
-    
+
 }
 
 //Processes user answer.

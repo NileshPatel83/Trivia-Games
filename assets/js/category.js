@@ -4,8 +4,7 @@ const storageKey = 'Trivia-Games';
 let storage = {
     selectedCategories:[],
     categoryNames:[],
-    totalScore:0,
-    level:0
+    totalScore:112,
 }
 
 // Check for click events on the navbar burger icon to add toggleClass
