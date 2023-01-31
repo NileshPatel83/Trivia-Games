@@ -62,7 +62,7 @@ containerEl.addEventListener('click', event => {
         processSpecificSearch(targetEl);
 
     //If the clicked element is check answer button and
-    //if the answer is correct, changes answer textbox background to gree,
+    //if the answer is correct, changes answer textbox background to green,
     //otherwise changes the background to red.
     //Also displays correct answer if user answer is wrong.
     } else if (targetEl.id.indexOf(checkAnsBtnID) !== -1){
@@ -137,11 +137,11 @@ function processUserAnswer(checkAnsBtnEl){
     if(isCorrectAnser(index, answerTextboxEl)){
 
         //Sets answer textbox background color to green, if user answer if correct.
-        answerTextboxEl.style.background = 'green';
-    } else{
+        answerTextboxEl.style.background = '#90EE90';
+    }else{
 
         //Sets answer textbox background color to red, if user answer if correct.
-        answerTextboxEl.style.background = 'red';
+        answerTextboxEl.style.background = '#FFCCCB';
 
         //Adds a dive element to display correct answer.
         let innerQuestionDivEl = checkAnsBtnEl.parentElement;
@@ -267,7 +267,7 @@ function displayHint(containerDivEl, wikiSearchResults, index){
      //Creates a div element that will contain all searches.
      let resultDivEl = document.createElement('div');
      resultDivEl.id = `${hintDivID}${index}`;
-     resultDivEl.className = 'mx-3 my-3 px-3 py-3';
+     resultDivEl.className = 'hint-result mx-3 my-3 px-3 py-3';
 
      //Displays search results of wikipedia search results are obtained.
      if(wikiSearchResults.query.search.length > 0){
@@ -414,6 +414,9 @@ async function init(){
 
     containerEl.classList.remove('is-hidden');
     
+    containerEl.classList.remove('is-hidden');
+    loaderEL. classList.add('is-hidden');
+    
     //Processes trivia questions.
     processTriviaQuestions();
 }
@@ -434,7 +437,7 @@ function getSelectedCategories(gameStorage){
 //Processes trivia questions.
 function processTriviaQuestions(){
     
-    //Loops through all trivial questions one by one and dispaly them in browser.
+    //Loops through all trivial questions one by one and display them in browser.
     for (let i = 0; i < triviaQuestions.length; i++) {
         displayTriviaQuestion(triviaQuestions[i], i)
     }
