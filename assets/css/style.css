@@ -1,5 +1,5 @@
 * {
-  background-color: #180344;
+  background-color: #0067B3;
 }
 
 .welcome {
@@ -50,12 +50,11 @@ li {
   color: #0067B3;
 }
 
-
 .fixed-square {
   position: fixed;
   bottom: 0px;
   right: 0px;
-  width: 300px;
+  width: 350px;
   height: 150px;
   text-align: center;
   border-radius: 10px;

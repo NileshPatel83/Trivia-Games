@@ -54,7 +54,7 @@ input[type=text]:focus {
 
 .question-button :hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 #ffdd57;
+    box-shadow: 0 0.4rem 1.4rem 0 #FFD53D;
 }
 
 .saveButton .button {
@@ -90,7 +90,7 @@ footer address {
     position: fixed;
     bottom: 0px;
     right: 0px;
-    width: 300px;
+    width: 350px;
     height: 150px;
     text-align: center;
     border-radius: 10px;
