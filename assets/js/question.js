@@ -381,13 +381,7 @@ async function getWikipediaSearchResults(searchString){
 //Initial function when the page is loaded.
 async function init(){
 
-    //Creates a div displaying "Loading.." untils questions are displayed.
-    let tempDivEl = createLoadingDiv();
-
     let allQuestions = [];
-
-    //Gets the name of local storage key from path.
-    //let storageKey = getLocalStorageKeyName();
 
     //Gets the local storage for trivia games.
     let gameStorage = getLocalStorage();
@@ -415,26 +409,12 @@ async function init(){
 
     //Gets list of 10 questions randomly from all questions list.
     triviaQuestions = getQuizList(allQuestions);
-
-    tempDivEl.remove();
     
     containerEl.classList.remove('is-hidden');
     loaderEL. classList.add('is-hidden');
     
     //Processes trivia questions.
     processTriviaQuestions();
-}
-
-//Creates a div displaying "Loading.." untils questions are displayed.
-function createLoadingDiv(){
-    let tempDivEl = document.createElement('div');
-    tempDivEl.textContent = 'Loading...';
-    tempDivEl.style.margin = '0 auto';
-    tempDivEl.className = 'title is-2 has-text-grey-darker is-justify-content-center';
-
-    containerEl.append(tempDivEl);
-
-    return tempDivEl;
 }
 
 //Gets list of categories selected by the user.
