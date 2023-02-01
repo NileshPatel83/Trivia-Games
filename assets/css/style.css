@@ -24,16 +24,17 @@
   transform: scale(1.1);
   box-shadow: 0 0.4rem 1.4rem 0 #FFD53D;
 }
-
+/* How to play instructions*/
 .title {
   margin-top: 3rem;
   color: #FFD53D;
-  text-indent: 75px;
+  text-indent: 25px;
 }
 
 ul {
+  list-style-type: disc;
   font-size: 1.2rem;
-  text-indent: 75px;
+  margin-left: 25px;
   color: #FFD53D;
 }
 
@@ -49,7 +50,7 @@ li {
   background-color: #FFD53D;
   color: #0067B3;
 }
-
+/* Score box*/
 .fixed-square {
   position: fixed;
   bottom: 0px;
