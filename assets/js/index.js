@@ -15,7 +15,7 @@ const magicBoxEl = $('#magicBox');
 let storage = {
     selectedCategories:[],
     categoryNames:[],
-    totalScore:149,
+    totalScore:0,
 }
 
 init();
